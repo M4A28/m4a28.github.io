@@ -1367,11 +1367,13 @@ ul.port-nav-list li a.active {
     color: #dfffea;
 }
 
+.else,
 .mysql {
     background-color: #daeafc;
     color: #254979;
 }
 
+.else:hover,
 .mysql:hover {
     background-color: #254979;
     color: #daeafc;
@@ -1459,6 +1461,28 @@ ul.port-nav-list li a.active {
 .java:hover {
     background-color: #b07219;
     color: #ffe4ea;
+}
+
+.kotlin {
+    background-color: #e7cbf0;
+    color: #970dd6;
+}
+
+.kotlin:hover {
+    background-color: #970dd6;
+    color: #e7cbf0;
+}
+
+.linux,
+.android {
+    background-color: #dfffea;
+    color: #257942;
+}
+
+.linux:hover,
+.android:hover {
+    background-color: #257942;
+    color: #dfffea;
 }
 .gis {
     background-color: #bde6c5;
