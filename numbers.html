@@ -402,6 +402,38 @@
             100% { background: var(--green-50); }
         }
         
+        /* خيارات متقدمة قابلة للطي */
+        .advanced-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 8px 0 10px 0;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid var(--green-100);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .advanced-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+        .advanced-toggle {
+            border: 1px solid var(--green-100);
+            background: var(--green-50);
+            color: var(--dark-green);
+            border-radius: 10px;
+            padding: 8px 14px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .advanced-toggle:hover { background: var(--light-green); color: #fff; }
+        .advanced-content { display: none; }
+        .advanced-content.open { display: block; animation: fadeIn 0.3s ease-out; }
+        
         /* استجابة للشاشات الصغيرة */
         @media (max-width: 768px) {
             .container {
@@ -549,46 +581,48 @@
                     </div>
                 </div>
 
-                <!-- الوحدات الأساسية -->
+                <!-- خيارات متقدمة -->
                 <div class="form-section">
-                    <div class="section-title">
-                        <i class="fas fa-language"></i>
-                        الوحدات الأساسية
+                    <div class="advanced-header">
+                        <div class="advanced-title"><i class="fas fa-cog"></i> خيارات متقدمة</div>
+                        <button type="button" id="advancedToggle" class="advanced-toggle">إظهار</button>
                     </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <input type="text" id="singular" class="form-input" placeholder="المفرد (مثال: ريال)">
-                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>المفرد (مثال: ريال)</div>
+                    <div id="advancedContent" class="advanced-content">
+                        <!-- الوحدات الأساسية -->
+                        <div class="form-section" style="margin-top: 10px;">
+                            <div class="section-title"><i class="fas fa-language"></i> الوحدات الأساسية</div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <input type="text" id="singular" class="form-input" placeholder="المفرد (مثال: ريال)">
+                                    <div class="form-input-hint"><i class="fas fa-info-circle"></i>المفرد (مثال: ريال)</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="dual" class="form-input" placeholder="المثنى (مثال: ريالان)">
+                                    <div class="form-input-hint"><i class="fas fa-info-circle"></i>المثنى (مثال: ريالان)</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="plural" class="form-input" placeholder="الجمع (مثال: ريالات)">
+                                    <div class="form-input-hint"><i class="fas fa-info-circle"></i>الجمع (مثال: ريالات)</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input type="text" id="dual" class="form-input" placeholder="المثنى (مثال: ريالان)">
-                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>المثنى (مثال: ريالان)</div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="plural" class="form-input" placeholder="الجمع (مثال: ريالات)">
-                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>الجمع (مثال: ريالات)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- وحدات الكسور -->
-                <div class="form-section">
-                    <div class="section-title">
-                        <i class="fas fa-percentage"></i>
-                        وحدات الكسور العشرية (اختيارية)
-                    </div>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <input type="text" id="fractionalSingular" class="form-input" placeholder="مفرد الكسر (مثال: هللة)">
-                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>مفرد الكسر (مثال: هللة)</div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="fractionalDual" class="form-input" placeholder="مثنى الكسر (مثال: هللتان)">
-                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>مثنى الكسر (مثال: هللتان)</div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="fractionalPlural" class="form-input" placeholder="جمع الكسر (مثال: هللات)">
-                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>جمع الكسر (مثال: هللات)</div>
+                        <!-- وحدات الكسور -->
+                        <div class="form-section">
+                            <div class="section-title"><i class="fas fa-percentage"></i> وحدات الكسور العشرية (اختيارية)</div>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <input type="text" id="fractionalSingular" class="form-input" placeholder="مفرد الكسر (مثال: هللة)">
+                                    <div class="form-input-hint"><i class="fas fa-info-circle"></i>مفرد الكسر (مثال: هللة)</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="fractionalDual" class="form-input" placeholder="مثنى الكسر (مثال: هللتان)">
+                                    <div class="form-input-hint"><i class="fas fa-info-circle"></i>مثنى الكسر (مثال: هللتان)</div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="fractionalPlural" class="form-input" placeholder="جمع الكسر (مثال: هللات)">
+                                    <div class="form-input-hint"><i class="fas fa-info-circle"></i>جمع الكسر (مثال: هللات)</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -924,6 +958,16 @@
                 e.preventDefault();
             }
         });
+
+        // تبديل الخيارات المتقدمة
+        const advancedToggle = document.getElementById('advancedToggle');
+        const advancedContent = document.getElementById('advancedContent');
+        if (advancedToggle && advancedContent) {
+            advancedToggle.addEventListener('click', function() {
+                const isOpen = advancedContent.classList.toggle('open');
+                advancedToggle.textContent = isOpen ? 'إخفاء' : 'إظهار';
+            });
+        }
 
         // تأثير التلاشي عند التحميل
         document.addEventListener('DOMContentLoaded', function() {
