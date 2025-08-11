@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محول الأرقام إلى كلمات عربية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary-green: #10b981;
+            --dark-green: #059669;
+            --light-green: #34d399;
+            --green-50: #f6fefb;
+            --green-100: #e3f9ee;
+            --green-200: #baf3d7;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-600: #4b5563;
+            --gray-800: #1f2937;
+            --shadow: 0 4px 16px 0 rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 30px -3px rgba(0,0,0,0.10);
+            --transition: 0.25s cubic-bezier(.4,0,.2,1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, var(--green-50) 0%, var(--green-100) 100%);
+            min-height: 100vh;
+            color: var(--gray-800);
+            line-height: 1.7;
+            transition: background 0.4s, color 0.4s;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 20px;
+        }
+        
+        /* تحسين العناوين والمسافات */
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .header p {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .main-card, .examples-section {
+            margin-bottom: 40px;
+        }
+        .form-section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-input {
+            border-radius: 16px;
+            padding: 20px;
+            font-size: 1.15rem;
+            background: var(--gray-50);
+            border: 2px solid var(--green-100);
+            transition: var(--transition);
+            margin-bottom: 6px;
+        }
+        .form-input:focus {
+            border-color: var(--primary-green);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(16,185,129,0.13);
+        }
+        .form-group {
+            position: relative;
+        }
+        /* تلميحات وأيقونات */
+        .form-input-hint {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            margin-top: 2px;
+            margin-right: 4px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .form-input-hint i {
+            color: var(--primary-green);
+            font-size: 1.1em;
+        }
+        /* زر التحويل */
+        .convert-button {
+            border-radius: 16px;
+            font-size: 1.2rem;
+            padding: 22px;
+            background: linear-gradient(90deg, var(--primary-green), var(--light-green));
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 4px 16px 0 rgba(16,185,129,0.10);
+            margin-top: 10px;
+        }
+        .convert-button:hover {
+            background: var(--dark-green);
+            color: #fff;
+            box-shadow: 0 8px 24px -4px rgba(16,185,129,0.13);
+            transform: translateY(-2px) scale(1.04);
+        }
+        /* زر النسخ */
+        .copy-btn {
+            background: var(--green-200);
+            color: var(--dark-green);
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        .copy-btn.copied::after {
+            content: 'تم النسخ!';
+            position: absolute;
+            top: -38px;
+            right: 50%;
+            transform: translateX(50%);
+            background: var(--primary-green);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px 0 rgba(16,185,129,0.10);
+            opacity: 1;
+            pointer-events: none;
+            z-index: 10;
+            animation: fadeInOut 1.5s;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .copy-btn:hover {
+            background: var(--primary-green);
+            color: #fff;
+        }
+        /* رسالة نجاح/خطأ أعلى النتيجة */
+        .feedback-message {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding: 12px 18px;
+            border-radius: 10px;
+            background: var(--green-100);
+            color: var(--dark-green);
+            box-shadow: 0 2px 8px 0 rgba(16,185,129,0.07);
+            min-height: 40px;
+        }
+        .feedback-message.error {
+            background: #ffeaea;
+            color: #d32f2f;
+        }
+        .feedback-message.success {
+            background: #e3f9ee;
+            color: var(--primary-green);
+        }
+        /* استجابة أفضل للشاشات الصغيرة */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2rem; }
+            .main-card, .examples-section { margin-bottom: 24px; }
+            .form-section { margin-bottom: 24px; }
+            .convert-button { font-size: 1rem; padding: 16px; }
+            .copy-btn { font-size: 1rem; padding: 10px 14px; }
+        }
+        
+        .main-card {
+            background: white;
+            border-radius: 22px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            border: 1px solid var(--green-100);
+            margin-bottom: 32px;
+        }
+        
+        .card-header {
+            background: var(--primary-green);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-radius: 22px 22px 0 0;
+        }
+        
+        .card-header i {
+            font-size: 24px;
+        }
+        
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        .card-body {
+            padding: 40px 32px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .toggle-buttons {
+            display: flex;
+            background: var(--green-50);
+            border-radius: 12px;
+            padding: 4px;
+            border: 1px solid var(--green-100);
+        }
+        
+        .toggle-btn {
+            flex: 1;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .toggle-btn.active {
+            background: var(--primary-green);
+            color: #fff;
+            box-shadow: 0 2px 8px 0 rgba(16,185,129,0.10);
+        }
+        
+        .result-section {
+            margin-top: 30px;
+            padding: 25px;
+            background: var(--green-50);
+            border-radius: 12px;
+            border: 1px solid var(--green-100);
+            position: relative;
+        }
+        
+        .result-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .result-text {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--green-200);
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--gray-800);
+            line-height: 1.7;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .examples-section {
+            margin-top: 40px;
+            background: white;
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--green-100);
+            overflow: hidden;
+        }
+        
+        .examples-header {
+            background: var(--green-100);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--green-200);
+        }
+        
+        .examples-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--dark-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .examples-grid {
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .example-card {
+            background: var(--gray-50);
+            border: 1px solid var(--green-100);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .example-card:hover {
+            background: var(--green-50);
+            border-color: var(--primary-green);
+            box-shadow: 0 4px 16px 0 rgba(16,185,129,0.10);
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .example-number {
+            font-weight: 600;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .example-result {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px 20px;
+            color: var(--gray-600);
+        }
+        
+        .footer p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        /* تأثيرات بسيطة */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .success {
+            animation: successPulse 0.6s ease-out;
+        }
+        
+        @keyframes successPulse {
+            0% { background: var(--green-50); }
+            50% { background: var(--green-100); }
+            100% { background: var(--green-50); }
+        }
+        
+        /* استجابة للشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .card-body,
+            .examples-grid {
+                padding: 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Dark mode styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #232d2b 0%, #1a2321 100%);
+            color: #e6f4ef;
+        }
+        body.dark-mode .main-card,
+        body.dark-mode .examples-section {
+            background: #232d2b;
+            box-shadow: 0 10px 30px -3px rgba(0,0,0,0.30);
+        }
+        body.dark-mode .form-input {
+            background: #1a2321;
+            color: #e6f4ef;
+            border-color: #2e4d45;
+        }
+        body.dark-mode .form-input:focus {
+            background: #232d2b;
+            border-color: var(--light-green);
+            box-shadow: 0 0 0 4px rgba(52,211,153,0.10);
+        }
+        body.dark-mode .convert-button {
+            background: var(--light-green);
+            color: #1a2321;
+        }
+        body.dark-mode .convert-button:hover {
+            background: var(--primary-green);
+            color: #fff;
+        }
+        body.dark-mode .toggle-btn.active {
+            background: var(--light-green);
+            color: #1a2321;
+        }
+        body.dark-mode .example-card {
+            background: #1a2321;
+            border-color: #2e4d45;
+        }
+        body.dark-mode .footer-credit {
+            background: #232d2b;
+            color: var(--light-green);
+            border-top: 1px solid #2e4d45;
+        }
+        /* Dark mode toggle button */
+        .dark-toggle {
+            position: fixed;
+            left: 32px;
+            bottom: 32px;
+            z-index: 1000;
+            background: var(--gray-50);
+            color: var(--primary-green);
+            border: 1.5px solid var(--green-100);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px 0 rgba(16,185,129,0.10);
+            transition: var(--transition);
+        }
+        .dark-toggle:hover {
+            background: var(--primary-green);
+            color: #fff;
+        }
+        body.dark-mode .dark-toggle {
+            background: #232d2b;
+            color: var(--light-green);
+            border-color: #2e4d45;
+        }
+        body.dark-mode .dark-toggle:hover {
+            background: var(--light-green);
+            color: #232d2b;
+        }
+        .form-group #numberInput {
+            font-size: 2rem;
+            padding: 28px 20px;
+            height: 64px;
+            border-width: 3px;
+            background: #fffbe7;
+            box-shadow: 0 2px 16px 0 rgba(255, 193, 7, 0.07);
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 600px) {
+            .form-group #numberInput {
+                font-size: 1.3rem;
+                padding: 18px 10px;
+                height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="dark-toggle" id="darkToggle" title="تبديل الوضع الليلي"><i class="fas fa-moon"></i></button>
+    <div class="container">
+        <!-- الرأس -->
+        <div class="header">
+            <h1>محول الأرقام إلى الكلمات العربية</h1>
+            <p>أداة بسيطة ودقيقة لتحويل الأرقام إلى نصوص عربية صحيحة نحوياً</p>
+        </div>
+
+        <!-- البطاقة الرئيسية -->
+        <div class="main-card">
+            <div class="card-header">
+                <i class="fas fa-calculator"></i>
+                <h2>أداة التحويل</h2>
+            </div>
+            
+            <div class="card-body">
+                <!-- إدخال الرقم -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-hashtag"></i>
+                        الرقم المراد تحويله
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numberInput" class="form-input" placeholder="مثال: 123456.75" inputmode="decimal" autocomplete="off" pattern="[0-9.,]*">
+                        <div class="form-input-hint"><i class="fas fa-info-circle"></i>أدخل الرقم فقط (يدعم الكسور حتى منزلتين)</div>
+                    </div>
+                </div>
+
+                <!-- الوحدات الأساسية -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-language"></i>
+                        الوحدات الأساسية
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" id="singular" class="form-input" placeholder="المفرد (مثال: ريال)">
+                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>المفرد (مثال: ريال)</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="dual" class="form-input" placeholder="المثنى (مثال: ريالان)">
+                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>المثنى (مثال: ريالان)</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="plural" class="form-input" placeholder="الجمع (مثال: ريالات)">
+                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>الجمع (مثال: ريالات)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- وحدات الكسور -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-percentage"></i>
+                        وحدات الكسور العشرية (اختيارية)
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" id="fractionalSingular" class="form-input" placeholder="مفرد الكسر (مثال: هللة)">
+                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>مفرد الكسر (مثال: هللة)</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="fractionalDual" class="form-input" placeholder="مثنى الكسر (مثال: هللتان)">
+                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>مثنى الكسر (مثال: هللتان)</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="fractionalPlural" class="form-input" placeholder="جمع الكسر (مثال: هللات)">
+                            <div class="form-input-hint"><i class="fas fa-info-circle"></i>جمع الكسر (مثال: هللات)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- النوع النحوي -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-venus-mars"></i>
+                        النوع النحوي
+                    </div>
+                    <div class="toggle-buttons">
+                        <button type="button" class="toggle-btn active" data-gender="masculine">
+                            <i class="fas fa-mars"></i>
+                            مذكر
+                        </button>
+                        <button type="button" class="toggle-btn" data-gender="feminine">
+                            <i class="fas fa-venus"></i>
+                            مؤنث
+                        </button>
+                    </div>
+                </div>
+
+                <!-- زر التحويل -->
+                <button class="convert-button" onclick="convertNumber()">
+                    <i class="fas fa-magic"></i>
+                    تحويل الرقم
+                </button>
+
+                <!-- عرض النتيجة -->
+                <div class="result-section" id="resultSection">
+                    <div class="result-header">
+                        <div class="result-title">
+                            <i class="fas fa-text-height"></i>
+                            النتيجة
+                        </div>
+                        <button class="copy-btn" id="copyBtn" onclick="copyResult()">
+                            <i class="fas fa-copy"></i>
+                            نسخ
+                        </button>
+                    </div>
+                    <div class="result-text" id="result">
+                        أدخل رقماً لتحويله إلى كلمات عربية
+                    </div>
+                </div>
+                <!-- رسالة نجاح/خطأ أعلى النتيجة -->
+                <div id="feedbackMsg" class="feedback-message" style="display:none;"></div>
+            </div>
+        </div>
+
+        <!-- قسم الأمثلة -->
+        <div class="examples-section">
+            <div class="examples-header">
+                <div class="examples-title">
+                    <i class="fas fa-lightbulb"></i>
+                    أمثلة تطبيقية
+                </div>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card" onclick="loadExample(1234.56, 'ريال', 'ريالان', 'ريالات', 'هللة', 'هللتان', 'هللات', true)">
+                    <div class="example-number">1,234.56 ريال سعودي</div>
+                    <div class="example-result">ألف ومئتان وأربعة وثلاثون ريالاً وستة وخمسون هللة</div>
+                </div>
+                
+                <div class="example-card" onclick="loadExample(2.5, 'متر', 'متران', 'أمتار', 'سنتيمتر', 'سنتيمتران', 'سنتيمترات', true)">
+                    <div class="example-number">2.5 متر</div>
+                    <div class="example-result">متران وخمسون سنتيمتراً</div>
+                </div>
+                
+                <div class="example-card" onclick="loadExample(1000000, 'دولار', 'دولاران', 'دولارات', '', '', '', true)">
+                    <div class="example-number">1,000,000 دولار</div>
+                    <div class="example-result">مليون دولار</div>
+                </div>
+                
+                <div class="example-card" onclick="loadExample(15.25, 'كيلو', 'كيلوان', 'كيلوات', 'جرام', 'جرامان', 'جرامات', true)">
+                    <div class="example-number">15.25 كيلوجرام</div>
+                    <div class="example-result">خمسة عشر كيلواً وخمسة وعشرون جراماً</div>
+                </div>
+                
+                <div class="example-card" onclick="loadExample(99.99, 'درهم', 'درهمان', 'دراهم', 'فلس', 'فلسان', 'فلوس', true)">
+                    <div class="example-number">99.99 درهم إماراتي</div>
+                    <div class="example-result">تسعة وتسعون درهماً وتسعة وتسعون فلساً</div>
+                </div>
+                
+                <div class="example-card" onclick="loadExample(7.5, 'ساعة', 'ساعتان', 'ساعات', 'دقيقة', 'دقيقتان', 'دقائق', true)">
+                    <div class="example-number">7.5 ساعة</div>
+                    <div class="example-result">سبع ساعات وثلاثون دقيقة</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- التذييل -->
+        <div class="footer">
+            <p>محول الأرقام إلى كلمات عربية - أداة مجانية</p>
+            <p>يدعم التصريف النحوي الصحيح والأرقام الكبيرة والكسور العشرية</p>
+        </div>
+    </div>
+
+    <footer class="footer-credit" style="background: var(--green-50); border-top: 1px solid var(--green-100); padding: 24px 0; text-align: center; margin-top: 48px; font-size: 1.1rem; color: var(--dark-green); letter-spacing: 0.5px;">
+        <div style="margin-bottom: 6px; font-weight: 500;">جميع الحقوق محفوظة © Mohammed Mosa</div>
+        <div style="font-size: 1rem; color: var(--gray-600);">تصميم وتطوير: Mohammed Mosa</div>
+    </footer>
+
+    <script>
+        let isMasculine = true;
+        
+        // إعداد أزرار النوع
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                isMasculine = this.dataset.gender === 'masculine';
+            });
+        });
+
+        function numberToArabicWordsFull(number, options) {
+            const { singular, dual, plural, fractionalSingular, fractionalDual, fractionalPlural, isMasculine } = options;
+            
+            const masculineUnits = [
+                'صفر', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة',
+                'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'أحد عشر', 'اثنا عشر',
+                'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر',
+                'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'
+            ];
+            
+            const feminineUnits = [
+                'صفر', 'واحدة', 'اثنتان', 'ثلاث', 'أربع', 'خمس', 'ست',
+                'سبع', 'ثمان', 'تسع', 'عشر', 'إحدى عشرة', 'اثنتا عشرة',
+                'ثلاث عشرة', 'أربع عشرة', 'خمس عشرة', 'ست عشرة',
+                'سبع عشرة', 'ثماني عشرة', 'تسع عشرة'
+            ];
+            
+            const tens = [
+                '', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون',
+                'ستون', 'سبعون', 'ثمانون', 'تسعون'
+            ];
+            
+            function getUnits(n) {
+                return isMasculine ? masculineUnits[n] : feminineUnits[n];
+            }
+            
+            function convertBelow100(n) {
+                if (n < 20) return getUnits(n);
+                const ten = Math.floor(n / 10);
+                const unit = n % 10;
+                if (unit === 0) return tens[ten];
+                return `${getUnits(unit)} و${tens[ten]}`;
+            }
+            
+            function convertBelow1000(n) {
+                if (n < 100) return convertBelow100(n);
+                const hundred = Math.floor(n / 100);
+                const rest = n % 100;
+                let hundredWord;
+                if (hundred === 1) hundredWord = 'مائة';
+                else if (hundred === 2) hundredWord = 'مئتان';
+                else hundredWord = `${getUnits(hundred)} مائة`;
+                if (rest === 0) return hundredWord;
+                return `${hundredWord} و${convertBelow100(rest)}`;
+            }
+            
+            function convertLarge(n) {
+                if (n === 0) return getUnits(0);
+                if (n < 1000) return convertBelow1000(n);
+                const scales = [
+                    ['', '', ''],
+                    ['ألف', 'ألفان', 'آلاف'],
+                    ['مليون', 'مليونان', 'ملايين'],
+                    ['مليار', 'ملياران', 'مليارات']
+                ];
+                const parts = [];
+                let scaleIndex = 0;
+                while (n > 0) {
+                    const chunk = n % 1000;
+                    if (chunk !== 0) {
+                        let chunkWords = '';
+                        if (scaleIndex > 0 && chunk === 1) {
+                            // لا تكتب "واحد ألف" بل فقط "ألف"
+                            chunkWords = scales[scaleIndex][0];
+                        } else {
+                            chunkWords = convertBelow1000(chunk);
+                            if (scaleIndex > 0) {
+                                let scaleWord;
+                                if (chunk === 2) scaleWord = scales[scaleIndex][1];
+                                else if (chunk >= 3 && chunk <= 10) scaleWord = scales[scaleIndex][2];
+                                else scaleWord = scales[scaleIndex][0];
+                                chunkWords += ` ${scaleWord}`;
+                            }
+                        }
+                        parts.unshift(chunkWords);
+                    }
+                    n = Math.floor(n / 1000);
+                    scaleIndex++;
+                }
+                return parts.join(' و');
+            }
+            
+            // عدل استخراج الكسر ليكون حتى منزلتين فقط
+            const intPart = Math.floor(number);
+            const fracPart = Math.round((number - intPart) * 100); // دائماً منزلتين فقط
+            
+            // صيغة الوحدة للجزء الصحيح
+            let unitWord = '';
+            if (intPart === 1 && singular) unitWord = singular;
+            else if (intPart === 2 && dual) unitWord = dual;
+            else if (intPart >= 3 && intPart <= 10 && plural) unitWord = plural;
+            else if (singular) unitWord = singular;
+            // إذا لم توجد وحدة، لا تضفها
+            let result = convertLarge(intPart);
+            if (unitWord) result += ` ${unitWord}`;
+            
+            // الجزء العشري
+            if (fracPart > 0 && fractionalSingular) {
+                let fracUnitWord = '';
+                if (fracPart === 1 && fractionalSingular) fracUnitWord = fractionalSingular;
+                else if (fracPart === 2 && fractionalDual) fracUnitWord = fractionalDual;
+                else if (fracPart >= 3 && fracPart <= 10 && fractionalPlural) fracUnitWord = fractionalPlural;
+                else if (fractionalSingular) fracUnitWord = fractionalSingular;
+                if (fracUnitWord) result += ` و${convertLarge(fracPart)} ${fracUnitWord}`;
+            }
+            
+            return result;
+        }
+
+        function convertNumber() {
+            let raw = document.getElementById('numberInput').value;
+            // استبدل الفاصلة بنقطة
+            raw = raw.replace(/،/g, '.').replace(/,/g, '.');
+            // إذا كان الإدخال فارغاً
+            if (!raw) {
+                document.getElementById('result').textContent = 'أدخل رقماً لتحويله إلى كلمات عربية';
+                document.getElementById('copyBtn').style.display = 'none';
+                showFeedback('يرجى إدخال رقم', 'error');
+                return;
+            }
+            // إذا كان الإدخال غير صالح
+            if (!/^\d*\.?\d*$/.test(raw)) {
+                document.getElementById('result').textContent = 'يرجى إدخال رقم صالح فقط';
+                document.getElementById('copyBtn').style.display = 'none';
+                showFeedback('المدخل غير صالح. أدخل أرقاماً فقط.', 'error');
+                return;
+            }
+            // اجعل الكسر حتى منزلتين فقط
+            if (raw.includes('.')) {
+                const [intPart, fracPart] = raw.split('.');
+                raw = intPart + '.' + (fracPart.substring(0, 2));
+            }
+            const number = parseFloat(raw);
+            
+            const singular = document.getElementById('singular').value.trim();
+            const dual = document.getElementById('dual').value.trim();
+            const plural = document.getElementById('plural').value.trim();
+            const fractionalSingular = document.getElementById('fractionalSingular').value.trim();
+            const fractionalDual = document.getElementById('fractionalDual').value.trim();
+            const fractionalPlural = document.getElementById('fractionalPlural').value.trim();
+            
+            if (isNaN(number)) {
+                document.getElementById('result').textContent = 'يرجى إدخال رقم صحيح';
+                document.getElementById('copyBtn').style.display = 'none';
+                showFeedback('يرجى إدخال رقم صحيح', 'error');
+                return;
+            }
+            
+            // أزل التحقق من الوحدات المطلوبة
+            const options = {
+                singular,
+                dual,
+                plural,
+                fractionalSingular: fractionalSingular || null,
+                fractionalDual: fractionalDual || null,
+                fractionalPlural: fractionalPlural || null,
+                isMasculine
+            };
+            
+            const result = numberToArabicWordsFull(number, options);
+            document.getElementById('result').textContent = result;
+            document.getElementById('copyBtn').style.display = 'flex';
+            showFeedback('تم التحويل بنجاح!', 'success');
+            
+            // تأثير النجاح
+            const resultSection = document.getElementById('resultSection');
+            resultSection.classList.add('success');
+            setTimeout(() => resultSection.classList.remove('success'), 600);
+        }
+
+        function loadExample(number, singular, dual, plural, fractionalSingular, fractionalDual, fractionalPlural, masculine) {
+            document.getElementById('numberInput').value = number;
+            document.getElementById('singular').value = singular;
+            document.getElementById('dual').value = dual;
+            document.getElementById('plural').value = plural;
+            document.getElementById('fractionalSingular').value = fractionalSingular;
+            document.getElementById('fractionalDual').value = fractionalDual;
+            document.getElementById('fractionalPlural').value = fractionalPlural;
+            
+            // تحديث النوع
+            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+            const targetBtn = masculine ? '[data-gender="masculine"]' : '[data-gender="feminine"]';
+            document.querySelector(targetBtn).classList.add('active');
+            isMasculine = masculine;
+            
+            // تحويل مع تأثير
+            setTimeout(() => convertNumber(), 100);
+        }
+
+        function copyResult() {
+            const resultText = document.getElementById('result').textContent;
+            navigator.clipboard.writeText(resultText).then(() => {
+                const btn = document.getElementById('copyBtn');
+                btn.classList.add('copied');
+                setTimeout(() => btn.classList.remove('copied'), 1500);
+            });
+        }
+
+        // تحويل تلقائي أثناء الكتابة وتصحيح الإدخال
+        const numberInput = document.getElementById('numberInput');
+        numberInput.addEventListener('input', function(e) {
+            // استبدل الفاصلة بنقطة
+            let val = numberInput.value.replace(/،/g, '.').replace(/,/g, '.');
+            // اسمح فقط بالأرقام والفاصلة العشرية
+            val = val.replace(/[^0-9.]/g, '');
+            // لا تسمح بأكثر من نقطة عشرية واحدة
+            const parts = val.split('.');
+            if (parts.length > 2) {
+                val = parts[0] + '.' + parts.slice(1).join('');
+            }
+            numberInput.value = val;
+            convertNumber();
+        });
+        // منع لصق نص غير رقمي
+        numberInput.addEventListener('paste', function(e) {
+            const pasted = (e.clipboardData || window.clipboardData).getData('text');
+            if (!/^\d*[.,]?\d*$/.test(pasted)) {
+                e.preventDefault();
+            }
+        });
+
+        // تأثير التلاشي عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.container').classList.add('fade-in');
+        });
+
+        // Dark mode toggle functionality
+        const darkToggle = document.getElementById('darkToggle');
+        darkToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if(document.body.classList.contains('dark-mode')) {
+                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
