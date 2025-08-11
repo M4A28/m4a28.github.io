@@ -740,30 +740,20 @@
 
         function numberToArabicWordsFull(number, options) {
             const { singular, dual, plural, fractionalSingular, fractionalDual, fractionalPlural, isMasculine } = options;
-            
             const masculineUnits = [
                 'صفر', 'واحد', 'اثنان', 'ثلاثة', 'أربعة', 'خمسة', 'ستة',
                 'سبعة', 'ثمانية', 'تسعة', 'عشرة', 'أحد عشر', 'اثنا عشر',
                 'ثلاثة عشر', 'أربعة عشر', 'خمسة عشر', 'ستة عشر',
                 'سبعة عشر', 'ثمانية عشر', 'تسعة عشر'
             ];
-            
             const feminineUnits = [
                 'صفر', 'واحدة', 'اثنتان', 'ثلاث', 'أربع', 'خمس', 'ست',
                 'سبع', 'ثمان', 'تسع', 'عشر', 'إحدى عشرة', 'اثنتا عشرة',
                 'ثلاث عشرة', 'أربع عشرة', 'خمس عشرة', 'ست عشرة',
                 'سبع عشرة', 'ثماني عشرة', 'تسع عشرة'
             ];
-            
-            const tens = [
-                '', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون',
-                'ستون', 'سبعون', 'ثمانون', 'تسعون'
-            ];
-            
-            function getUnits(n) {
-                return isMasculine ? masculineUnits[n] : feminineUnits[n];
-            }
-            
+            const tens = [ '', '', 'عشرون', 'ثلاثون', 'أربعون', 'خمسون', 'ستون', 'سبعون', 'ثمانون', 'تسعون' ];
+            function getUnits(n) { return isMasculine ? masculineUnits[n] : feminineUnits[n]; }
             function convertBelow100(n) {
                 if (n < 20) return getUnits(n);
                 const ten = Math.floor(n / 10);
@@ -771,7 +761,6 @@
                 if (unit === 0) return tens[ten];
                 return `${getUnits(unit)} و${tens[ten]}`;
             }
-            
             function convertBelow1000(n) {
                 if (n < 100) return convertBelow100(n);
                 const hundred = Math.floor(n / 100);
@@ -783,110 +772,117 @@
                 if (rest === 0) return hundredWord;
                 return `${hundredWord} و${convertBelow100(rest)}`;
             }
-            
-            function convertLarge(n) {
-                if (n === 0) return getUnits(0);
-                if (n < 1000) return convertBelow1000(n);
+            function splitToTriplets(str) {
+                const digits = str.replace(/^0+(?=\d)/, '');
+                if (digits === '') return ['0'];
+                const triplets = [];
+                for (let i = digits.length; i > 0; i -= 3) {
+                    const start = Math.max(0, i - 3);
+                    triplets.unshift(digits.slice(start, i));
+                }
+                return triplets;
+            }
+            function convertLargeFromString(intStr) {
+                const normalized = intStr.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '');
+                if (normalized === '' || /^0+$/.test(normalized)) return getUnits(0);
+                if (normalized.length <= 3) return convertBelow1000(parseInt(normalized, 10));
                 const scales = [
                     ['', '', ''],
                     ['ألف', 'ألفان', 'آلاف'],
                     ['مليون', 'مليونان', 'ملايين'],
-                    ['مليار', 'ملياران', 'مليارات']
+                    ['مليار', 'ملياران', 'مليارات'],
+                    ['تريليون', 'تريليونان', 'تريليونات'],
+                    ['كوادريليون', 'كوادريليونان', 'كوادريليونات'],
+                    ['كوينتليون', 'كوينتليونان', 'كوينتليونات'],
+                    ['سكستليون', 'سكستليونان', 'سكستليونات'],
+                    ['سيبتليون', 'سيبتليونان', 'سيبتليونات'],
+                    ['أوكتليون', 'أوكتليونان', 'أوكتليونات'],
+                    ['نونيليون', 'نونيليونان', 'نونيليونات'],
+                    ['ديسيليون', 'ديسيليونان', 'ديسيليونات']
                 ];
+                const groups = splitToTriplets(normalized);
                 const parts = [];
-                let scaleIndex = 0;
-                while (n > 0) {
-                    const chunk = n % 1000;
-                    if (chunk !== 0) {
-                        let chunkWords = '';
-                        if (scaleIndex > 0 && chunk === 1) {
-                            // لا تكتب "واحد ألف" بل فقط "ألف"
-                            chunkWords = scales[scaleIndex][0];
-                        } else {
-                            chunkWords = convertBelow1000(chunk);
-                            if (scaleIndex > 0) {
-                                let scaleWord;
-                                if (chunk === 2) scaleWord = scales[scaleIndex][1];
-                                else if (chunk >= 3 && chunk <= 10) scaleWord = scales[scaleIndex][2];
-                                else scaleWord = scales[scaleIndex][0];
-                                chunkWords += ` ${scaleWord}`;
-                            }
+                const totalGroups = groups.length;
+                for (let idx = 0; idx < totalGroups; idx++) {
+                    const chunkStr = groups[idx];
+                    const chunkVal = parseInt(chunkStr, 10);
+                    if (chunkVal === 0) continue;
+                    const scaleIndex = totalGroups - idx - 1; // 0 = وحدات
+                    let chunkWords = '';
+                    if (scaleIndex > 0 && chunkVal === 1) {
+                        chunkWords = (scales[scaleIndex] || ['', '', ''])[0] || '';
+                    } else {
+                        chunkWords = convertBelow1000(chunkVal);
+                        if (scaleIndex > 0) {
+                            let scaleWord;
+                            if (chunkVal === 2) scaleWord = (scales[scaleIndex] || ['', '', ''])[1] || '';
+                            else if (chunkVal >= 3 && chunkVal <= 10) scaleWord = (scales[scaleIndex] || ['', '', ''])[2] || '';
+                            else scaleWord = (scales[scaleIndex] || ['', '', ''])[0] || '';
+                            if (scaleWord) chunkWords += ` ${scaleWord}`;
                         }
-                        parts.unshift(chunkWords);
                     }
-                    n = Math.floor(n / 1000);
-                    scaleIndex++;
+                    parts.push(chunkWords);
                 }
                 return parts.join(' و');
             }
-            
-            // عدل استخراج الكسر ليكون حتى منزلتين فقط
-            const intPart = Math.floor(number);
-            const fracPart = Math.round((number - intPart) * 100); // دائماً منزلتين فقط
-            
-            // صيغة الوحدة للجزء الصحيح
+            // تطبيع الإدخال ليدعم الأرقام الكبيرة كسلسلة نصية
+            const rawStr = String(number).replace(/،/g, '.').replace(/,/g, '.').trim();
+            const [intRaw, fracRaw] = rawStr.split('.')
+                .map(part => (part || '').replace(/[^0-9]/g, ''));
+            const intPartStr = intRaw.replace(/^0+(?=\d)/, '') || '0';
+            const fracStr = (fracRaw || '').slice(0, 2);
+            const fracPart = fracStr === '' ? 0 : parseInt(fracStr, 10);
+            // اختيار وحدة الجزء الصحيح
             let unitWord = '';
-            if (intPart === 1 && singular) unitWord = singular;
-            else if (intPart === 2 && dual) unitWord = dual;
-            else if (intPart >= 3 && intPart <= 10 && plural) unitWord = plural;
-            else if (singular) unitWord = singular;
-            // إذا لم توجد وحدة، لا تضفها
-            let result = convertLarge(intPart);
+            try {
+                const intBig = BigInt(intPartStr);
+                if (intBig === 1n && singular) unitWord = singular;
+                else if (intBig === 2n && dual) unitWord = dual;
+                else if (intBig >= 3n && intBig <= 10n && plural) unitWord = plural;
+                else if (singular) unitWord = singular;
+            } catch (_) {
+                if (singular) unitWord = singular;
+            }
+            let result = convertLargeFromString(intPartStr);
             if (unitWord) result += ` ${unitWord}`;
-            
-            // الجزء العشري
+            // الجزء العشري حتى منزلتين
             if (fracPart > 0 && fractionalSingular) {
                 let fracUnitWord = '';
                 if (fracPart === 1 && fractionalSingular) fracUnitWord = fractionalSingular;
                 else if (fracPart === 2 && fractionalDual) fracUnitWord = fractionalDual;
                 else if (fracPart >= 3 && fracPart <= 10 && fractionalPlural) fracUnitWord = fractionalPlural;
                 else if (fractionalSingular) fracUnitWord = fractionalSingular;
-                if (fracUnitWord) result += ` و${convertLarge(fracPart)} ${fracUnitWord}`;
+                const fracWords = convertLargeFromString(String(fracPart));
+                if (fracUnitWord) result += ` و${fracWords} ${fracUnitWord}`;
             }
-            
             return result;
         }
 
         function convertNumber() {
             let raw = document.getElementById('numberInput').value;
-            // استبدل الفاصلة بنقطة
             raw = raw.replace(/،/g, '.').replace(/,/g, '.');
-            // إذا كان الإدخال فارغاً
             if (!raw) {
                 document.getElementById('result').textContent = 'أدخل رقماً لتحويله إلى كلمات عربية';
                 document.getElementById('copyBtn').style.display = 'none';
-                showFeedback('يرجى إدخال رقم', 'error');
+                showFeedback && showFeedback('يرجى إدخال رقم', 'error');
                 return;
             }
-            // إذا كان الإدخال غير صالح
             if (!/^\d*\.?\d*$/.test(raw)) {
                 document.getElementById('result').textContent = 'يرجى إدخال رقم صالح فقط';
                 document.getElementById('copyBtn').style.display = 'none';
-                showFeedback('المدخل غير صالح. أدخل أرقاماً فقط.', 'error');
+                showFeedback && showFeedback('المدخل غير صالح. أدخل أرقاماً فقط.', 'error');
                 return;
             }
-            // اجعل الكسر حتى منزلتين فقط
             if (raw.includes('.')) {
                 const [intPart, fracPart] = raw.split('.');
                 raw = intPart + '.' + (fracPart.substring(0, 2));
             }
-            const number = parseFloat(raw);
-            
             const singular = document.getElementById('singular').value.trim();
             const dual = document.getElementById('dual').value.trim();
             const plural = document.getElementById('plural').value.trim();
             const fractionalSingular = document.getElementById('fractionalSingular').value.trim();
             const fractionalDual = document.getElementById('fractionalDual').value.trim();
             const fractionalPlural = document.getElementById('fractionalPlural').value.trim();
-            
-            if (isNaN(number)) {
-                document.getElementById('result').textContent = 'يرجى إدخال رقم صحيح';
-                document.getElementById('copyBtn').style.display = 'none';
-                showFeedback('يرجى إدخال رقم صحيح', 'error');
-                return;
-            }
-            
-            // أزل التحقق من الوحدات المطلوبة
             const options = {
                 singular,
                 dual,
@@ -896,13 +892,10 @@
                 fractionalPlural: fractionalPlural || null,
                 isMasculine
             };
-            
-            const result = numberToArabicWordsFull(number, options);
+            const result = numberToArabicWordsFull(raw, options);
             document.getElementById('result').textContent = result;
             document.getElementById('copyBtn').style.display = 'flex';
-            showFeedback('تم التحويل بنجاح!', 'success');
-            
-            // تأثير النجاح
+            showFeedback && showFeedback('تم التحويل بنجاح!', 'success');
             const resultSection = document.getElementById('resultSection');
             resultSection.classList.add('success');
             setTimeout(() => resultSection.classList.remove('success'), 600);
