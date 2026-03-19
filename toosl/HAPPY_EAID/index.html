@@ -270,12 +270,56 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    background: rgba(184, 142, 47, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--gold);
+}
+.count-item {
+    text-align: center;
+    min-width: 60px;
+}
+.count-item span {
+    display: block;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--gold-light);
+}
+.count-item label {
+    font-size: 12px;
+    color: var(--white);
+}
+
+/* الألوان الافتراضية للوضع الفاتح (اختياري) */
+body.light-mode .main-wrapper {
+    background: #f4f4f4;
+    color: #333;
+    border-color: #0a2a22;
+}
+body.light-mode .input-group label { color: #0a2a22; }
+body.light-mode .input-group input, body.light-mode .input-group select {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+}
+    
     </style>
 </head>
 
 <body>
 
     <div class="main-wrapper">
+        <button id="themeToggle" onclick="toggleTheme()"
+            style="position: absolute; top: 10px; left: 10px; background: none; border: none; cursor: pointer; font-size: 20px;">
+            🌙
+        </button>
+
         <div class="header-calligraphy">
             <img src="img/image.png" alt="عيد مبارك">
         </div>
@@ -350,7 +394,7 @@
                     </div>
 
                     <div class="footer-branding">
-                       https://m4a28.github.io | اهداء من محمد موسى
+                        https://m4a28.github.io | اهداء من محمد موسى
                     </div>
                 </div>
             </div>
@@ -472,7 +516,7 @@
         // 5. وظائف التحميل والمشاركة
         function generateCanvas(callback) {
             html2canvas(eidCard, {
-                scale: 2, // دقة جيدة بدون مبالغة
+                scale: 6, // دقة جيدة بدون مبالغة
                 useCORS: true,
                 backgroundColor: null,
                 logging: false
@@ -495,6 +539,17 @@
             });
         }
 
+
+            // 2. منطق تبديل الثيم
+            function toggleTheme() {
+                document.body.classList.toggle('light-mode');
+                const btn = document.getElementById('themeToggle');
+                if (document.body.classList.contains('light-mode')) {
+                    btn.innerText = '☀️';
+                } else {
+                    btn.innerText = '🌙';
+                }
+            }
         function shareToWhatsApp() {
             const btn = document.querySelector('.share-btn');
             const originalText = btn.innerText;
