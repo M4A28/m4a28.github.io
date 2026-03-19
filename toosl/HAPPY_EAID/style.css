@@ -1,0 +1,493 @@
+/* تنسيقات عامة للموقع */
+:root {
+    --bg-color: #f4f7f6;
+    --panel-bg: #ffffff;
+    --text-color: #333333;
+    --accent-color: #b59410;
+    /* لون ذهبي من القوالب */
+    --accent-dark: #1a332d;
+    /* لون غامق من القوالب */
+    --card-width: 380px;
+    /* عرض ثابت تقريبي للبطاقة المعروضة */
+    --card-aspect-ratio: 0.75;
+    /* نسبة العرض إلى الارتفاع تقريباً */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.site-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.site-title {
+    color: var(--accent-dark);
+    font-size: 2em;
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* تنسيقات لوحة التحكم (اليسار) */
+.controls-panel {
+    flex: 0 0 350px;
+    background-color: var(--panel-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.panel-title {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: var(--accent-dark);
+}
+
+.template-selector {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.template-option {
+    cursor: pointer;
+    border: 3px solid transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.template-option img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.template-option:hover {
+    transform: scale(1.03);
+}
+
+.template-option.active {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 10px rgba(181, 148, 16, 0.3);
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--accent-dark);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    font-family: 'Cairo', sans-serif;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.download-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent-dark);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'Cairo', sans-serif;
+}
+
+.download-btn:hover {
+    background-color: #0e1d19;
+}
+
+/* تنسيقات لوحة المعاينة (اليمين) - هذا هو التصميم الفعلي */
+.preview-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-preview {
+    width: var(--card-width);
+    height: calc(var(--card-width) / var(--card-aspect-ratio));
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    /* هوامش داخلية للبطاقة */
+    color: #333;
+    /* لون نص افتراضي */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* === تنسيقات محتوى البطاقة الفعلي (نصوص وشعارات) === */
+
+/* شعار الخط العربي العلوي (مثال placeholder) */
+.eid-calligraphy {
+    width: 60%;
+    height: 60px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholder-calligraphy {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    /* مؤقت */
+}
+
+/* نص المعايدة الرئيسي */
+.greeting-text {
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    /* يجب تعديل لون النص لكل قالب */
+}
+
+/* مساحة اسم المهدى إليه */
+.recipient-name-area {
+    width: 100%;
+    text-align: center;
+    margin-bottom: auto;
+    /* يدفع التذييل لأسفل */
+}
+
+.display-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px 15px;
+    /* يجب تعديل لون الاسم لكل قالب */
+}
+
+/* التذييل للبطاقة (العلامة التجارية) */
+.card-footer {
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    /* مؤقت */
+    padding-top: 15px;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.branding {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    /* يجب تعديل لون النص لكل قالب */
+}
+
+.badrat-logo {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    /* مؤقت */
+}
+
+
+/* === تخصيص التصاميم لكل قالب (استنساخ هوية الصور) === */
+
+/* قالب 1: الغامق (image_0.png) */
+.card-preview.template-1 {
+    background-color: #1a332d;
+    background-image: url('template1_bg.png');
+    /* رابط الخلفية */
+    color: #ffffff;
+}
+
+.card-preview.template-1 .eid-calligraphy .placeholder-calligraphy {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* مؤقت */
+.card-preview.template-1 .display-name {
+    color: #ffffff;
+}
+
+.card-preview.template-1 .branding {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.card-preview.template-1 .card-footer {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* قالب 2: الوردي (image_1.png) */
+.card-preview.template-2 {
+    background-color: #fff0f5;
+    background-image: url('template2_bg.png');
+    /* رابط الخلفية */
+    color: #5d4037;
+    /* لون بني للنص */
+}
+
+.card-preview.template-2 .display-name {
+    color: #5d4037;
+}
+
+.card-preview.template-2 .eid-calligraphy {
+    /* هنا يجب وضع شعار الختم الدائري */
+    height: 90px;
+    margin-bottom: 10px;
+}
+
+.card-preview.template-2 .eid-calligraphy .placeholder-calligraphy {
+    background-color: rgba(181, 148, 16, 0.1);
+}
+
+/* مؤقت */
+.card-preview.template-2 .greeting-text {
+    font-weight: bold;
+}
+
+
+/* قالب 3: الرخامي (image_2.png) */
+.card-preview.template-3 {
+    background-color: #f5f5f5;
+    background-image: url('template3_bg.png');
+    /* رابط الخلفية */
+    color: #333333;
+}
+
+.card-preview.template-3 .display-name {
+    color: var(--accent-color);
+}
+
+/* الاسم ذهبي */
+.card-preview.template-3 .branding {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+
+/* قالب 4: الأزرق (image_3.png) */
+.card-preview.template-4 {
+    background-color: #e6f7ff;
+    background-image: url('template4_bg.png');
+    /* رابط الخلفية */
+    color: #4b3060;
+    /* لون أرجواني من التصميم */
+}
+
+.card-preview.template-4 .eid-calligraphy {
+    width: 70%;
+    height: 75px;
+}
+
+/* شعار خطي أرجواني */
+.card-preview.template-4 .eid-calligraphy .placeholder-calligraphy {
+    background-color: rgba(75, 48, 96, 0.1);
+}
+
+/* مؤقت */
+.card-preview.template-4 .display-name {
+    color: #4b3060;
+}
+
+.card-preview.template-4 .branding {
+    color: rgba(75, 48, 96, 0.7);
+}
+
+
+/* استجابة الشاشات (Responsive) */
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .controls-panel {
+        flex: 1;
+    }
+
+    .preview-panel {
+        padding: 20px;
+    }
+}
+
+/* تنسيق المخطوطة العلوية */
+.top-ornament {
+    width: 200px;
+    height: 120px;
+    margin-top: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+}
+
+/* تنسيق الزخرفة الإسلامية السفلية (كما في الصور) */
+.bottom-ornament {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    /* ارتفاع الزخرفة السفلية */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    opacity: 0.6;
+    /* شفافية هادئة للزخرفة */
+    z-index: 1;
+}
+
+.card-content {
+    position: relative;
+    z-index: 3;
+    /* لضمان ظهور النص فوق الزخرفة */
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* --- تخصيص الزخارف لكل قالب --- */
+
+/* القالب 1 (الغامق): زخارف ذهبية/بيضاء على خلفية داكنة */
+.template-1 .top-ornament {
+    background-image: url('https://i.imgur.com/your-white-calligraphy.png');
+    /* رابط مخطوطة بيضاء */
+}
+
+.template-1 .bottom-ornament {
+    background-image: url('https://i.imgur.com/your-dark-pattern.png');
+    /* زخرفة سفلية غامقة */
+}
+
+/* القالب 2 (الوردي): الختم الدائري والزخرفة الناعمة */
+.template-2 .top-ornament {
+    background-image: url('https://i.imgur.com/your-circle-logo.png');
+    /* الختم الدائري في الصورة 2 */
+    width: 150px;
+    height: 150px;
+}
+
+.template-2 .bottom-ornament {
+    background-image: url('https://i.imgur.com/your-pink-pattern.png');
+}
+
+/* القالب 4 (الأزرق): المخطوطة الأرجوانية */
+.template-4 .top-ornament {
+    background-image: url('https://i.imgur.com/your-purple-calligraphy.png');
+}
+
+.template-4 .bottom-ornament {
+    background-image: url('https://i.imgur.com/your-blue-pattern.png');
+}
+
+/* تنسيق قسم الأسماء */
+.names-section {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.recipient-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 30px;
+    border-radius: 50px;
+    /* شكل بيضاوي كما في الصور */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sender-box {
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+.from-label {
+    opacity: 0.8;
+    margin-left: 5px;
+}
+
+.sender-name-text {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* الزخارف الإسلامية - كخلفية شفافة */
+.top-ornament-calligraphy {
+    position: absolute;
+    top: 5%;
+    width: 80%;
+    height: 150px;
+    background-image: url('path-to-calligraphy.png');
+    /* ضع هنا رابط صورة المخطوطة */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.15;
+    /* لجعلها زخرفة خلفية باهتة وفخمة */
+    pointer-events: none;
+}
+
+.bottom-islamic-pattern {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 120px;
+    background-image: url('path-to-pattern.png');
+    /* الزخرفة الهندسية السفلية */
+    background-size: cover;
+    opacity: 0.2;
+    z-index: 0;
+}

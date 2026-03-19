@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صانع بطاقات العيد - بذرة خير</title>
+    <!-- خط Cairo من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary-dark: #0a2a22;
+            --gold: #b88e2f;
+            --gold-light: #d4af37;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--primary-dark);
+            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            /* زخرفة خفيفة للخلفية */
+            color: var(--white);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* الحاوية الرئيسية */
+        .main-wrapper {
+            width: 90%;
+            max-width: 1100px;
+            padding: 40px;
+            border: 2px solid var(--gold);
+            position: relative;
+            background: rgba(10, 42, 34, 0.9);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            margin: 20px;
+        }
+
+        /* الزخارف في الزوايا */
+        .main-wrapper::before,
+        .main-wrapper::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: url('https://i.imgur.com/W2SNDe2.png');
+            /* رابط صورة زخرفة إسلامية ركنية */
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+        }
+
+        .main-wrapper::before {
+            top: -10px;
+            right: -10px;
+        }
+
+        .main-wrapper::after {
+            bottom: -10px;
+            left: -10px;
+            transform: rotate(180deg);
+        }
+
+        .header-calligraphy {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-calligraphy img {
+            width: 250px;
+            filter: drop-shadow(0 0 10px var(--gold));
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* لوحة التحكم */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Cairo';
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* اختيار القوالب */
+        .template-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .thumb {
+            width: 70px;
+            height: 90px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .thumb.active {
+            border-color: var(--gold-light);
+            transform: scale(1.1);
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, var(--gold), var(--gold-light));
+            color: var(--primary-dark);
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(184, 142, 47, 0.4);
+        }
+
+        /* منطقة المعاينة (البطاقة) */
+        .preview-area {
+            display: flex;
+            justify-content: center;
+        }
+
+        #eidCard {
+            width: 400px;
+            height: 533px;
+            /* نسبة 3:4 */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .card-calligraphy {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .greeting-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .recipient-name-wrap {
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            padding: 5px 30px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .recipient-name {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .sender-name {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .footer-branding {
+            position: absolute;
+            bottom: 20px;
+            font-size: 12px;
+            opacity: 0.8;
+            width: 100%;
+        }
+
+        /* فئات القوالب */
+        .card-dark {
+            background-color: #0d1b18;
+            color: #fff;
+            background-image: url('img/dark_pg.svg');
+        }
+
+        .card-pink {
+            background-color: #fdf2f2;
+            color: #5a3e3e;
+            background-image: url('img/pink_bg.svg');
+        }
+
+        .card-white {
+            background-color: #f9f9f9;
+            color: #333;
+            background-image: url('img/white_bg.svg');
+        }
+
+        .card-blue {
+            background-color: #f0f7ff;
+            color: #f7f7f7;
+            background-image: url('img/blue_bg.svg');
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .main-wrapper {
+                padding: 20px;
+            }
+
+            #eidCard {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <div class="header-calligraphy">
+            <!-- صورة مخطوطة "عيد مبارك" كبيرة في الأعلى -->
+            <img src="img/image.png" alt="عيد مبارك">
+        </div>
+
+        <div class="container">
+            <!-- القسم الأيمن: التحكم -->
+            <div class="controls">
+                <div class="input-group">
+                    <label>اسم المهدى إليه:</label>
+                    <input type="text" id="inRecipient" placeholder="أدخل اسم الشخص" maxlength="25">
+                </div>
+
+                <div class="input-group">
+                    <label>اسم المهدى منه (المرسل):</label>
+                    <input type="text" id="inSender" placeholder="أدخل اسمك" maxlength="25">
+                </div>
+
+                <label style="color: var(--gold-light); font-weight: 600;">اختر القالب:</label>
+                <div class="template-selector">
+                    <div class="thumb active" onclick="setTemplate('dark', this)">
+                        <img src="img/dark.png" alt="Dark">
+                    </div>
+                    <div class="thumb" onclick="setTemplate('pink', this)">
+                        <img src="img/pink.png" alt="Pink">
+                    </div>
+                    <div class="thumb" onclick="setTemplate('white', this)">
+                        <img src="img/white.png" alt="White">
+                    </div>
+                    <div class="thumb" onclick="setTemplate('blue', this)">
+                        <img src="img/blue.png" alt="Blue">
+                    </div>
+                </div>
+
+                <button class="download-btn" onclick="downloadImage()">تحميل كصورة PNG</button>
+            </div>
+
+            <!-- القسم الأيسر: المعاينة -->
+            <div class="preview-area">
+                <div id="eidCard" class="card-dark">
+                    <img src="img/image.png" class="card-calligraphy" alt="Calligraphy">
+
+                    <div class="greeting-text">
+                        تقبل الله منا ومنكم<br>
+                        أهنئكـم بمناسبـــــة<br>
+                        عيد الفطر المبــــارك<br>
+                        أعاده الله علينا وعليكم<br>
+                        باليمن والبركات والعافية
+                    </div>
+
+                    <div class="recipient-name-wrap">
+                        <span class="recipient-name" id="outRecipient">الاسم المهدى إليه</span>
+                    </div>
+
+                    <div class="sender-name">
+                        محبكم: <span id="outSender">الاسم المهدى منه</span>
+                    </div>
+
+                    <div class="footer-branding">
+                        اهداء من محمد موسى
+                    </div>
+
+                    <!-- زخرفة سفلية للبطاقة -->
+                    <div
+                        style="position:absolute; bottom:0; width:100%; height:60px; background-image:url('https://i.imgur.com/Wp7p4rX.png'); background-size:cover; opacity:0.3;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ربط المدخلات بالمعاينة الحية
+        const inRecipient = document.getElementById('inRecipient');
+        const inSender = document.getElementById('inSender');
+        const outRecipient = document.getElementById('outRecipient');
+        const outSender = document.getElementById('outSender');
+        const eidCard = document.getElementById('eidCard');
+
+        inRecipient.addEventListener('input', (e) => {
+            outRecipient.innerText = e.target.value || "الاسم المهدى إليه";
+        });
+
+        inSender.addEventListener('input', (e) => {
+            outSender.innerText = e.target.value || "الاسم المهدى منه";
+        });
+
+        // تبديل القوالب
+        function setTemplate(type, el) {
+            // تحديث الثمبز
+            document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+
+            // تحديث كلاس البطاقة
+            eidCard.className = '';
+            if (type === 'dark') eidCard.classList.add('card-dark');
+            if (type === 'pink') eidCard.classList.add('card-pink');
+            if (type === 'white') eidCard.classList.add('card-white');
+            if (type === 'blue') eidCard.classList.add('card-blue');
+        }
+
+        // وظيفة التحميل
+        function downloadImage() {
+            const btn = document.querySelector('.download-btn');
+            btn.innerText = "جاري التحميل...";
+
+            html2canvas(eidCard, {
+                scale: 3, // دقة عالية
+                useCORS: true,
+                backgroundColor: null
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `Eid-Greeting-${inRecipient.value || 'Card'}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                btn.innerText = "تحميل كصورة PNG";
+            });
+        }
+    </script>
+
+</body>
+
+</html>
