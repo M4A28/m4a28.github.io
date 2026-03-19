@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صانع بطاقات العيد -  محمد موسى</title>
-    <!-- خط Cairo من Google Fonts -->
+    <title>صانع بطاقات العيد - محمد موسى</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -14,13 +13,12 @@
             --gold: #b88e2f;
             --gold-light: #d4af37;
             --white: #ffffff;
+            --whatsapp-green: #25D366;
         }
 
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--primary-dark);
-            background-image: url('https://www.transparenttextures.com/patterns/dark-matter.png');
-            /* زخرفة خفيفة للخلفية */
             color: var(--white);
             margin: 0;
             display: flex;
@@ -41,19 +39,6 @@
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
             border-radius: 15px;
             margin: 20px;
-        }
-
-       
-
-        .main-wrapper::before {
-            top: -10px;
-            right: -10px;
-        }
-
-        .main-wrapper::after {
-            bottom: -10px;
-            left: -10px;
-            transform: rotate(180deg);
         }
 
         .header-calligraphy {
@@ -87,7 +72,8 @@
             color: var(--gold-light);
         }
 
-        .input-group input {
+        .input-group input,
+        .input-group select {
             width: 100%;
             padding: 12px;
             background: rgba(255, 255, 255, 0.05);
@@ -97,6 +83,12 @@
             font-family: 'Cairo';
             font-size: 16px;
             outline: none;
+        }
+
+        /* تنسيق القوائم المنسدلة لتظهر بشكل جيد */
+        .input-group select option {
+            background-color: var(--primary-dark);
+            color: white;
         }
 
         /* اختيار القوالب */
@@ -127,34 +119,55 @@
             object-fit: cover;
         }
 
-        .download-btn {
-            background: linear-gradient(45deg, var(--gold), var(--gold-light));
-            color: var(--primary-dark);
+        /* تنسيق الأزرار */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
             border: none;
             padding: 15px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 900;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
             transition: 0.3s;
+            font-family: 'Cairo';
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .download-btn:hover {
+        .download-btn {
+            background: linear-gradient(45deg, var(--gold), var(--gold-light));
+            color: var(--primary-dark);
+        }
+
+        .share-btn {
+            background-color: var(--whatsapp-green);
+            color: white;
+        }
+
+        .btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(184, 142, 47, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* منطقة المعاينة (البطاقة) */
+        /* =========================================
+           منطقة المعاينة (البطاقة القديمة تماماً)
+           ========================================= */
         .preview-area {
             display: flex;
             justify-content: center;
         }
 
         #eidCard {
+            /* الأبعاد القديمة بدقة */
             width: 400px;
             height: 533px;
-            /* نسبة 3:4 */
             background-size: cover;
             background-position: center;
             position: relative;
@@ -165,6 +178,8 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            box-sizing: border-box;
+            /* لضمان الأبعاد الدقيقة */
         }
 
         .card-calligraphy {
@@ -179,12 +194,15 @@
             font-weight: 600;
         }
 
+        /* تنسيق اسم المهدى إليه القديم */
         .recipient-name-wrap {
             border: 2px solid var(--gold);
             border-radius: 50px;
             padding: 5px 30px;
             display: inline-block;
             margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            /* إضافة تباين بسيط */
         }
 
         .recipient-name {
@@ -192,6 +210,7 @@
             font-weight: 700;
         }
 
+        /* تنسيق اسم المرسل القديم */
         .sender-name {
             font-size: 16px;
             opacity: 0.9;
@@ -205,7 +224,7 @@
             width: 100%;
         }
 
-        /* فئات القوالب */
+        /* فئات القوالب الخلفيات القديمة */
         .card-dark {
             background-color: #0d1b18;
             color: #fff;
@@ -226,10 +245,11 @@
 
         .card-blue {
             background-color: #f0f7ff;
-            color: #f7f7f7;
+            color: #333;
             background-image: url('img/blue_bg.svg');
         }
 
+        /* responsive */
         @media (max-width: 800px) {
             .container {
                 grid-template-columns: 1fr;
@@ -241,7 +261,13 @@
 
             #eidCard {
                 width: 100%;
-                max-width: 350px;
+                max-width: 380px;
+                height: 506px;
+                /* الحفاظ على النسبة */
+            }
+
+            .action-buttons {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -251,13 +277,26 @@
 
     <div class="main-wrapper">
         <div class="header-calligraphy">
-            <!-- صورة مخطوطة "عيد مبارك" كبيرة في الأعلى -->
             <img src="img/image.png" alt="عيد مبارك">
         </div>
 
         <div class="container">
-            <!-- القسم الأيمن: التحكم -->
             <div class="controls">
+
+                <div class="input-group">
+                    <label>المناسبة (يتم تحديدها تلقائياً):</label>
+                    <select id="inOccasion" onchange="updatePhrasesLibrary()">
+                        <option value="عيد الفطر">عيد الفطر المبارك</option>
+                        <option value="عيد الأضحى">عيد الأضحى المبارك</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>اختر نص التهنئة:</label>
+                    <select id="inPhrase" onchange="updateCardText()">
+                    </select>
+                </div>
+
                 <div class="input-group">
                     <label>اسم المهدى إليه:</label>
                     <input type="text" id="inRecipient" placeholder="أدخل اسم الشخص" maxlength="25">
@@ -284,15 +323,17 @@
                     </div>
                 </div>
 
-                <button class="download-btn" onclick="downloadImage()">تحميل كصورة PNG</button>
+                <div class="action-buttons">
+                    <button class="btn download-btn" onclick="downloadImage()">تحميل كصورة PNG</button>
+                    <button class="btn share-btn" onclick="shareToWhatsApp()">مشاركة واتساب</button>
+                </div>
             </div>
 
-            <!-- القسم الأيسر: المعاينة -->
             <div class="preview-area">
                 <div id="eidCard" class="card-dark">
                     <img src="img/image.png" class="card-calligraphy" alt="Calligraphy">
 
-                    <div class="greeting-text">
+                    <div class="greeting-text" id="outGreeting">
                         تقبل الله منا ومنكم<br>
                         أهنئكـم بمناسبـــــة<br>
                         عيد الفطر المبــــارك<br>
@@ -311,21 +352,54 @@
                     <div class="footer-branding">
                         اهداء من محمد موسى
                     </div>
-
-  
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ربط المدخلات بالمعاينة الحية
+        // داتا العبارات الجاهزة بناءً على المناسبة
+        const phrasesLibrary = {
+            "عيد الفطر": [
+                "تقبل الله منا ومنكم<br>أهنئكـم بمناسبـــــة<br><b>عيد الفطر المبــــارك</b><br>أعاده الله علينا وعليكم باليمن والبركات",
+                "يسرني أن أتقدم إليكم بأصدق التهاني<br>بمناسبة حلول <b>عيد الفطر السعيد</b><br>سائلاً المولى أن يتقبل طاعتكم",
+                "كل عام وأنتم بخير<br>أمانينا تسبق تهانينا وفرحتنا تسبق ليالينا<br>وعيد فطر مبارك علينا وعليكم",
+                "أدام الله عليكم الأعياد دهوراً<br>وألبسكم من تقواه نوراً<br>عيد فطر مبارك سعيد",
+                "بأرق العبارات وأندى الكلمات<br>نهنئكم بحلول <b>عيد الفطر</b><br>وكل عام وأنتم بتمام الصحة والعافية",
+                "بمناسبة عيد الفطر.. أسأل الله<br>أن يجعل أيامكم كلها عيداً<br>ويتقبل منكم الصيام والقيام",
+                "عيد فطر سعيد.. أعاده الله عليكم<br>بالخير والمسرات، وجعلكم فيه<br>من الفائزين المقبولين",
+                "هنأكم الله بالقبول، وأسكنكم الجنة<br>مع الرسول، ورزقكم بالعيد<br>بهجة لا تزول",
+                "أجمل باقات الورد نرسلها لكم<br>تهنئة بـ <b>عيد الفطر السعيد</b><br>دمتم في حفظ الله ورعايته",
+                "من القلب إلى القلب.. كل عام<br>وأنتم بخير بمناسبة عيد الفطر<br>عساكم من عواده دائماً وأبداً",
+                "فطر مبارك.. جعل الله صيامكم مقبولاً<br>وذنبكم مغفوراً، وعيدكم فرحاً لا ينتهي"
+            ],
+            "عيد الأضحى": [
+                "تقبل الله منا ومنكم صالح الأعمال<br>أهنئكـم بمناسبـــــة<br><b>عيد الأضحى المبــــارك</b><br>كل عام وأنتم إلى الله أقرب",
+                "بأطيب التحايا وأجمل الأماني<br>نهنئكم بـ <b>عيد الأضحى السعيد</b><br>أعاده الله عليكم باليمن والإيمان",
+                "لبيك اللهم لبيك.. عيد مبارك<br>وجعل الله ذنبكم مغفوراً وحجكم مبروراً<br>وسعيكم في الخير مشكوراً",
+                "بمناسبة عيد الأضحى.. نرسل لكم<br>أصدق الدعوات بالقبول والرضوان<br>وكل عام وأنتم في أحسن حال",
+                "أجمل التهاني المعطرة بذكر الله<br>بمناسبة حلول <b>عيد الأضحى</b><br>أعاده الله علينا وعليكم أعواماً مديدة",
+                "إلى من نحبهم في الله.. عيدكم مبارك<br>وتقبل الله ضحاياكم وطاعاتكم<br>وجعلكم من المقبولين بفضله",
+                "يا من تسكنون القلوب.. كل عام<br>وأنتم بخير بمناسبة <b>عيد الأضحى</b><br>دمتم لنا سنداً وفرحاً في كل عيد",
+                "نسأل الله لكم في هذا العيد<br>أن يبشركم بما يسركم، ويكف عنكم<br>ما يضركم، عيدكم مبارك وسعيد",
+                "عيد أضحى مبارك.. جعل الله<br>كل أيامكم نسائم من الفرح والبهجة<br>وأعاده عليكم بالخير والبركة",
+                "من مكة ونسائم الطواف.. نهنئكم<br>بحلول العيد الكبير، جعلكم الله<br>من حجاج بيته العام القادم",
+                "بمناسبة العيد.. تقبل الله طاعتكم<br>وأتم بالعيد فرحتكم، وأقر أعينكم<br>بنصر أمتكم، كل عام وأنتم بخير"
+            ]
+        };
+
+        // ربط العناصر
         const inRecipient = document.getElementById('inRecipient');
         const inSender = document.getElementById('inSender');
+        const inOccasion = document.getElementById('inOccasion');
+        const inPhrase = document.getElementById('inPhrase');
+
         const outRecipient = document.getElementById('outRecipient');
         const outSender = document.getElementById('outSender');
+        const outGreeting = document.getElementById('outGreeting');
         const eidCard = document.getElementById('eidCard');
 
+        // 1. التحديث الحي للأسماء
         inRecipient.addEventListener('input', (e) => {
             outRecipient.innerText = e.target.value || "الاسم المهدى إليه";
         });
@@ -334,13 +408,60 @@
             outSender.innerText = e.target.value || "الاسم المهدى منه";
         });
 
-        // تبديل القوالب
+        // 2. إدارة مكتبة العبارات وتحديث نص البطاقة
+        function updatePhrasesLibrary() {
+            const occasion = inOccasion.value;
+            const phrases = phrasesLibrary[occasion];
+
+            // تفريغ القائمة المنسدلة
+            inPhrase.innerHTML = '';
+
+            // ملء القائمة
+            phrases.forEach((phrase, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                // تنظيف النص من <br> لإظهاره في القائمة
+                option.text = phrase.replace(/<br>/g, ' ').replace(/<b>/g, '').replace(/<\/b>/g, '').substring(0, 30) + "...";
+                inPhrase.appendChild(option);
+            });
+
+            // تحديث البطاقة بأول عبارة
+            updateCardText();
+        }
+
+        function updateCardText() {
+            const occasion = inOccasion.value;
+            const phraseIndex = inPhrase.value;
+            outGreeting.innerHTML = phrasesLibrary[occasion][phraseIndex];
+        }
+
+        // 3. التحديد التلقائي للمناسبة بناءً على التاريخ الهجري
+        function autoDetectHijriOccasion() {
+            try {
+                // محاولة الحصول على الشهر الهجري الحالي
+                const today = new Date();
+                const hijriMonth = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-uma', { month: 'numeric' }).format(today);
+                const monthInt = parseInt(hijriMonth);
+
+                // أشهر الحج (ذو القعدة 11 و ذو الحجة 12)
+                if (monthInt === 11 || monthInt === 12) {
+                    inOccasion.value = "عيد الأضحى";
+                } else {
+                    inOccasion.value = "عيد الفطر";
+                }
+            } catch (e) {
+                console.log("التحويل الهجري غير مدعوم في هذا المتصفح، تم استخدام الافتراضي.");
+                inOccasion.value = "عيد الفطر"; // افتراضي
+            }
+            // تحديث المكتبة والنص بناءً على الاختيار التلقائي
+            updatePhrasesLibrary();
+        }
+
+        // 4. تبديل القوالب (القديمة)
         function setTemplate(type, el) {
-            // تحديث الثمبز
             document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
 
-            // تحديث كلاس البطاقة
             eidCard.className = '';
             if (type === 'dark') eidCard.classList.add('card-dark');
             if (type === 'pink') eidCard.classList.add('card-pink');
@@ -348,23 +469,60 @@
             if (type === 'blue') eidCard.classList.add('card-blue');
         }
 
-        // وظيفة التحميل
-        function downloadImage() {
-            const btn = document.querySelector('.download-btn');
-            btn.innerText = "جاري التحميل...";
-
+        // 5. وظائف التحميل والمشاركة
+        function generateCanvas(callback) {
             html2canvas(eidCard, {
-                scale: 3, // دقة عالية
+                scale: 2, // دقة جيدة بدون مبالغة
                 useCORS: true,
-                backgroundColor: null
+                backgroundColor: null,
+                logging: false
             }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = `Eid-Greeting-${inRecipient.value || 'Card'}.png`;
-                link.href = canvas.toDataURL("image/png");
-                link.click();
-                btn.innerText = "تحميل كصورة PNG";
+                callback(canvas);
             });
         }
+
+        function downloadImage() {
+            const btn = document.querySelector('.download-btn');
+            const originalText = btn.innerText;
+            btn.innerText = "جاري التوليد...";
+
+            generateCanvas((canvas) => {
+                const link = document.createElement('a');
+                link.download = `عيد-${inRecipient.value || 'مبارك'}.png`;
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+                btn.innerText = originalText;
+            });
+        }
+
+        function shareToWhatsApp() {
+            const btn = document.querySelector('.share-btn');
+            const originalText = btn.innerText;
+            btn.innerText = "جاري التحضير...";
+
+            generateCanvas((canvas) => {
+                canvas.toBlob((blob) => {
+                    btn.innerText = originalText;
+                    const file = new File([blob], "eid-card.png", { type: "image/png" });
+
+                    // التحقق من دعم المتصفح للمشاركة
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        navigator.share({
+                            files: [file],
+                            title: 'تهنئة عيد',
+                            text: 'كل عام وأنتم بخير'
+                        });
+                    } else {
+                        alert("متصفحك لا يدعم مشاركة الملفات مباشرة. سيتم تحميل الصورة، ويمكنك إرسالها يدوياً.");
+                        downloadImage();
+                    }
+                }, 'image/png');
+            });
+        }
+
+        // البداية
+        autoDetectHijriOccasion();
+
     </script>
 
 </body>
