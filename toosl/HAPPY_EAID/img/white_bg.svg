@@ -1,21 +1,29 @@
 <svg width="1320" height="1839" viewBox="0 0 1320 1839" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1320" height="1839" fill="#FDF5E6"/>
-  
+  <rect width="1320" height="1839" fill="#F9F9F9"/>
+
   <defs>
-    <pattern id="islamic-star" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-      <path d="M50 5 L62 38 L95 50 L62 62 L50 95 L38 62 L5 50 L38 38 Z" 
-            stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.3"/>
-      <circle cx="50" cy="50" r="3" fill="#D4AF37" opacity="0.2"/>
+    <pattern id="eight-point-star" x="0" y="0" width="150" height="150" patternUnits="userSpaceOnUse">
+      <g stroke="#D4AF37" stroke-width="1.5" fill="none">
+        <rect x="45" y="45" width="60" height="60" transform="rotate(0 75 75)"/>
+        <rect x="45" y="45" width="60" height="60" transform="rotate(45 75 75)"/>
+      </g>
+      
+      <circle cx="75" cy="75" r="3" fill="#D4AF37" opacity="0.5"/>
+      
+      <line x1="0" y1="75" x2="150" y2="75" stroke="#D4AF37" stroke-width="0.3" opacity="0.2"/>
+      <line x1="75" y1="0" x2="75" y2="150" stroke="#D4AF37" stroke-width="0.3" opacity="0.2"/>
     </pattern>
   </defs>
-  
-  <rect width="1320" height="1839" fill="url(#islamic-star)"/>
-  
-  <rect x="40" y="40" width="1240" height="1759" stroke="#B8860B" stroke-width="4" fill="none" rx="10"/>
-  <rect x="60" y="60" width="1200" height="1719" stroke="#D4AF37" stroke-width="1" fill="none" rx="5"/>
-  
-  <path d="M40 150 L40 40 L150 40" stroke="#B8860B" stroke-width="8" fill="none"/>
-  <path d="M1170 40 L1280 40 L1280 150" stroke="#B8860B" stroke-width="8" fill="none"/>
-  <path d="M40 1689 L40 1799 L150 1799" stroke="#B8860B" stroke-width="8" fill="none"/>
-  <path d="M1170 1799 L1280 1799 L1280 1689" stroke="#B8860B" stroke-width="8" fill="none"/>
+
+  <rect width="1320" height="1839" fill="url(#eight-point-star)"/>
+
+  <rect x="40" y="40" width="1240" height="1759" stroke="#B8860B" stroke-width="5" fill="none" rx="5"/>
+  <rect x="60" y="60" width="1200" height="1719" stroke="#D4AF37" stroke-width="1.5" fill="none" rx="2"/>
+
+  <g stroke="#B8860B" stroke-width="4" fill="none">
+    <path d="M40 140 L40 40 L140 40"/>
+    <path d="M1180 40 L1280 40 L1280 140"/>
+    <path d="M40 1699 L40 1799 L140 1799"/>
+    <path d="M1180 1799 L1280 1799 L1280 1699"/>
+  </g>
 </svg>
