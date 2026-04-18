@@ -153,7 +153,8 @@
         { "name": "مستخرج الالوان", "desc": "أداة لاستخراج الالوان من الصور", "icon": "fas fa-palette", "link": "tools/color_extractor.html", "users": "900" },
         { "name": "المعايد", "desc": "أداة لصناعة كروت المعايدة", "icon": "fas fa-paint-brush", "link": "tools/HAPPY_EAID/index.html", "users": "3.2K" },
         { "name": "مستخرج الروابط", "desc": "أداة لاستخراج الروابط من المواقع", "icon": "fas fa-link", "link": "tools/link_extractor.html", "users": "1.6K" },
-        { "name": "منشئ التعبيرات النمطية", "desc": "أداة لبناء التعبيرات النمطية بشكل تفاعلي", "icon": "fas fa-asterisk", "link": "tools/regex-builder.html", "users": "620" }
+        { "name": "منشئ التعبيرات النمطية", "desc": "أداة لبناء التعبيرات النمطية بشكل تفاعلي", "icon": "fas fa-asterisk", "link": "tools/regex-builder.html", "users": "620" },
+        { "name": "دليل دوال إكسل الذكي", "desc": "أداة للبحث عن دوال إكسل ومعرفة وظيفتها وتصنيفها", "icon": "fas fa-table", "link": "tools/excel_function.html", "users": "520" }
         
       ]
     },
@@ -369,6 +370,13 @@
     "icon": "fas fa-asterisk",
     "link": "tools/regex-builder.html",
     "users": "620"
+  },
+  {
+    "name": "Excel Function Guide",
+    "desc": "A tool to find the right Excel function for your needs",
+    "icon": "fas fa-table",
+    "link": "tools/excel_function.html",
+    "users": "520"
   }
 ]
     },
