@@ -406,7 +406,7 @@ function handleSubmit(e) {
     btn.disabled = true;
 
     // إرسال البيانات إلى FormSubmit عبر AJAX
-    fetch("https://formsubmit.co/ajax/mailtomecv12@gmail.com", {
+    fetch("https://formsubmit.co/ajax/mohammed.mosa.eg@gmail.com", {
         method: "POST",
         headers: { 
             'Content-Type': 'application/json',
