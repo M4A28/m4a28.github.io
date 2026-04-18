@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Mohammed Mosa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+    tailwind.config =   {
+        theme: {
+            extend: {
+                fontFamily: {
+                    ar: ['Cairo', 'sans-serif'],
+                    en: ['Outfit', 'sans-serif'],
+                }
+            }
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <!-- شريط علوي زخرفي -->
+    <div class="top-accent-bar"></div>
+
+    <!-- === النافبار === -->
+    <nav class="navbar" id="navbar">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="#hero" class="text-lg font-bold" style="color: var(--accent); font-family: var(--font-display);">
+                <span id="navLogo">MM</span>
+            </a>
+            <div class="hidden md:flex items-center gap-1" id="navLinks"></div>
+            <div class="flex items-center gap-2">
+                <!-- تبديل اللغة -->
+                <button onclick="toggleLang()" id="langBtn"
+                    class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold transition-all"
+                    style="background: var(--accent-muted); color: var(--accent); border: 1px solid var(--border);"
+                    aria-label="تبديل اللغة">EN</button>
+                <!-- تبديل الثيم -->
+                <button onclick="toggleTheme()" id="themeBtn"
+                    class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all"
+                    style="background: var(--accent-muted); color: var(--accent); border: 1px solid var(--border);"
+                    aria-label="تبديل الوضع">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <!-- زر الموبايل -->
+                <button onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 rounded-lg flex items-center justify-center"
+                    style="background: var(--accent-muted); color: var(--accent); border: 1px solid var(--border);"
+                    aria-label="القائمة">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- قائمة الموبايل -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 w-10 h-10 rounded-lg flex items-center justify-center"
+            style="background: var(--accent-muted); color: var(--accent);" aria-label="إغلاق">
+            <i class="fas fa-times text-lg"></i>
+        </button>
+        <div id="mobileNavLinks" class="flex flex-col items-center gap-1"></div>
+    </div>
+
+    <!-- === المحتوى الرئيسي === -->
+    <main id="mainContent"></main>
+
+    <!-- === الفوتر === -->
+    <footer id="footer" class="text-center py-8" style="border-top: 1px solid var(--border);"></footer>
+
+    <!-- التوست -->
+    <div class="toast" id="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+/* === متغيرات الألوان === */
+:root {
+    /* Flutter Dark Theme */
+    --bg: #0B0E14;
+    --bg-alt: #11141D;
+    --card: #1A1F2B;
+    --card-hover: #232937;
+    --fg: #F0F4F8; /* أبيض مائل للزرقة قليلًا */
+    --fg-secondary: #94A3B8;
+    --fg-muted: #64748B;
+    
+    /* Flutter Accents (Blue & Cyan) */
+    --accent: #13B9FD; /* Flutter Sky Blue */
+    --accent-hover: #0175C2; /* Flutter Primary Blue */
+    --accent-muted: rgba(19, 185, 253, 0.12);
+    --accent-glow: rgba(19, 185, 253, 0.25);
+    
+    --border: rgba(19, 185, 253, 0.1);
+    --border-strong: rgba(19, 185, 253, 0.2);
+    --shadow: 0 4px 24px rgba(0,0,0,0.5);
+    --shadow-lg: 0 12px 48px rgba(0,0,0,0.6);
+    --glass: rgba(26, 31, 43, 0.7);
+}
+
+[data-theme="light"] {
+    /* Flutter Light Theme */
+    --bg: #F5F7FA;
+    --bg-alt: #E2E8F0;
+    --card: #FFFFFF;
+    --card-hover: #F8FAFC;
+    --fg: #0F172A;
+    --fg-secondary: #475569;
+    --fg-muted: #94A3B8;
+    
+    /* Flutter Accents for Light Mode */
+    --accent: #02569B; /* Deep Flutter Blue */
+    --accent-hover: #0175C2;
+    --accent-muted: rgba(2, 86, 155, 0.1);
+    --accent-glow: rgba(2, 86, 155, 0.15);
+    
+    --border: rgba(2, 86, 155, 0.12);
+    --border-strong: rgba(2, 86, 155, 0.22);
+    --shadow: 0 4px 24px rgba(2, 86, 155, 0.06);
+    --shadow-lg: 0 12px 48px rgba(2, 86, 155, 0.08);
+    --glass: rgba(255, 255, 255, 0.75);
+}
+/* === الأساسيات === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Cairo', 'Outfit', sans-serif;
+    transition: background 0.5s ease, color 0.4s ease;
+    overflow-x: hidden;
+    line-height: 1.7;
+}
+[lang="en"] body { font-family: 'Outfit', 'Cairo', sans-serif; }
+
+::selection { background: var(--accent); color: #fff; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+a { color: var(--accent); text-decoration: none; transition: color 0.3s; }
+a:hover { color: var(--accent-hover); }
+
+/* === النافبار === */
+.navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 1rem 2rem;
+    background: transparent;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(0px);
+}
+.navbar.scrolled {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.7rem 2rem;
+    box-shadow: var(--shadow);
+}
+.nav-link {
+    color: var(--fg-secondary);
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    transition: all 0.3s;
+    position: relative;
+}
+.nav-link:hover, .nav-link.active {
+    color: var(--accent);
+    background: var(--accent-muted);
+}
+
+/* === الأزرار === */
+.btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent); color: #fff;
+    padding: 0.75rem 1.75rem; border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    border: none; cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px var(--accent-glow);
+}
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--accent-glow);
+}
+.btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent; color: var(--accent);
+    padding: 0.75rem 1.75rem; border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    border: 1.5px solid var(--accent);
+    cursor: pointer; transition: all 0.3s ease;
+}
+.btn-outline:hover {
+    background: var(--accent-muted);
+    transform: translateY(-2px);
+}
+
+/* === البطاقات === */
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.4s ease;
+    box-shadow: var(--shadow);
+}
+.card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-strong);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* === عناوين الأقسام === */
+.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--fg);
+    margin-bottom: 0.5rem;
+}
+.section-subtitle {
+    color: var(--fg-secondary);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+}
+.accent-line {
+    width: 50px; height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
+
+/* === الهيرو === */
+.hero-bg {
+    position: absolute; inset: 0; overflow: hidden; z-index: 0;
+}
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    top: -200px; right: -100px;
+    animation: float1 8s ease-in-out infinite;
+}
+.hero-bg::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--accent-muted) 0%, transparent 70%);
+    bottom: -100px; left: -50px;
+    animation: float2 10s ease-in-out infinite;
+}
+@keyframes float1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 30px) scale(1.1); }
+}
+@keyframes float2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -20px) scale(1.15); }
+}
+.hero-grid-pattern {
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.3;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+}
+
+.photo-frame {
+    width: 220px; height: 220px;
+    border-radius: 24px;
+    border: 3px solid var(--accent);
+    padding: 4px;
+    background: var(--accent-muted);
+    box-shadow: 0 0 40px var(--accent-glow);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+.photo-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+/* === شريط المهارات === */
+.skill-tag {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    background: var(--accent-muted);
+    color: var(--accent);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+}
+.skill-tag:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: scale(1.05);
+}
+
+/* === بطاقة المعرفة === */
+.knowledge-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+.knowledge-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+.knowledge-card:hover::before { opacity: 1; }
+.knowledge-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* === بطاقة المشروع === */
+.project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    box-shadow: var(--shadow);
+}
+.project-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+.project-card img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.project-card:hover img { transform: scale(1.05); }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.project-tag {
+    background: var(--accent-muted);
+    color: var(--accent);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+/* === بطاقة الشهادة === */
+.cert-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: all 0.4s ease;
+}
+.cert-card:hover {
+    border-color: var(--border-strong);
+    background: var(--card-hover);
+    transform: translateX(4px);
+}
+.cert-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: var(--accent-muted);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* === بطاقة الأداة === */
+.tool-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.tool-card::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 0;
+    background: linear-gradient(to top, var(--accent-muted), transparent);
+    transition: height 0.4s;
+}
+.tool-card:hover::after { height: 100%; }
+.tool-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+.tool-card > * { position: relative; z-index: 1; }
+.tool-icon-wrap {
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    background: var(--accent-muted);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: var(--accent);
+    transition: all 0.4s;
+}
+.tool-card:hover .tool-icon-wrap {
+    background: var(--accent);
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* === قسم الاختبار === */
+.testing-section {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.testing-section::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+    top: -100px; right: -50px;
+    opacity: 0.5;
+}
+.benefit-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.5rem 0;
+}
+.benefit-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent-muted);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+}
+
+/* === الفورم === */
+.form-input {
+    width: 100%;
+    background: var(--bg-alt);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 0.85rem 1.1rem;
+    color: var(--fg);
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    outline: none;
+}
+.form-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+.form-input::placeholder { color: var(--fg-muted); }
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--fg-secondary);
+    margin-bottom: 0.4rem;
+}
+
+/* === التوست === */
+.toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--card); color: var(--fg);
+    border: 1px solid var(--accent);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* === أنيميشن الظهور === */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* === الموبايل === */
+.mobile-menu {
+    display: none;
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--fg);
+    padding: 0.75rem 2rem;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+.mobile-menu a:hover {
+    background: var(--accent-muted);
+    color: var(--accent);
+}
+
+/* === احترام حركة المستخدم === */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* === الشريط العلوي للنافبار === */
+.top-accent-bar {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1001;
+}
+
+/* === تعليمات الموبايل === */
+@media (max-width: 768px) {
+    .navbar { padding: 0.8rem 1rem; }
+    .navbar.scrolled { padding: 0.6rem 1rem; }
+    .photo-frame { width: 160px; height: 160px; }
+    .testing-section { padding: 2rem 1.25rem; }
+    .hero-flex { flex-direction: column-reverse; text-align: center; }
+    .hero-flex .photo-frame { margin: 0 auto 1.5rem; }
+    .hero-actions { justify-content: center; }
+    .hero-skills { justify-content: center; }
+    .hero-contact-info { justify-content: center; }
+}
+
+/* === خط فاصل زخرفي === */
+.divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    margin: 0 auto;
+    max-width: 80%;
+}
+
+/* === خط متحرك === */
+.pulse-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+/* === Education Timeline === */
+.timeline-line {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--border));
+    top: 0; bottom: 0;
+}
+[dir="rtl"] .timeline-line { right: 23px; }
+[dir="ltr"] .timeline-line { left: 23px; }
+.timeline-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    position: absolute;
+    z-index: 2;
+}
+[dir="rtl"] .timeline-dot { right: 18px; }
+[dir="ltr"] .timeline-dot { left: 18px; }

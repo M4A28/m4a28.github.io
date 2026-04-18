@@ -1,0 +1,27 @@
+<svg width="1320" height="1839" viewBox="0 0 1320 1839" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1320" height="1839" fill="#E0F2F7"/>
+  
+  <defs>
+    <pattern id="baby-blue-geo" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M60 10 L72 48 L110 60 L72 72 L60 110 L48 72 L10 60 L48 48 Z" 
+            stroke="#89CFF0" stroke-width="1.5" fill="none" opacity="0.6"/>
+      <rect x="55" y="55" width="10" height="10" fill="#FFFFFF" opacity="0.4" transform="rotate(45 60 60)"/>
+    </pattern>
+    
+    <radialGradient id="soft-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#E0F2F7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1320" height="1839" fill="url(#baby-blue-geo)"/>
+  
+  <rect width="1320" height="1839" fill="url(#soft-glow)"/>
+
+  <rect x="40" y="40" width="1240" height="1759" stroke="#B0E0E6" stroke-width="2" fill="none" rx="10"/>
+  <rect x="55" y="55" width="1210" height="1729" stroke="#FFFFFF" stroke-width="4" fill="none" rx="8"/>
+  <rect x="70" y="70" width="1180" height="1699" stroke="#89CFF0" stroke-width="1.5" fill="none" rx="6"/>
+
+  <path d="M40 180 L40 40 L180 40" stroke="#89CFF0" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M1140 40 L1280 40 L1280 180" stroke="#89CFF0" stroke-width="8" fill="none" stroke-linecap="round"/>
+</svg>

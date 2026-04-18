@@ -1,0 +1,404 @@
+{
+  "ar": {
+    "meta": {
+      "title": "محمد موسى | مطور تطبيقات",
+      "logo": "م"
+    },
+    "nav": {
+      "home": "الرئيسية",
+      "education": "التعليم",
+      "knowledge": "المعرفة",
+      "certificates": "الشهادات",
+      "projects": "المشاريع",
+      "tools": "الأدوات",
+      "testing": "الاختبار",
+      "contact": "تواصل"
+    },
+    "hero": {
+      "greeting": "مرحباً، أنا",
+      "name": "محمد موسى",
+      "title": "مطور تطبيقات",
+      "bio": "أبني تجارب رقمية استثنائية تجمع بين الأداء العالي والتصميم المتقن. أؤمن بأن التفاصيل الصغيرة تصنع الفارق الكبير.",
+      "phone": "+966 54 829 3542",
+      "email": "mohammed.mosa.eg@gmail.com",
+      "linkedin": "https://linkedin.com/in/mohammed-mosa-eg",
+      "github": "https://github.com/m4a28",
+      "whatsapp": "https://wa.me/message/MXV75QMVKRYZC1",
+      "photo": "images/home/mohammed_mosa.png",
+      "skills": ["Java", "Kotlin", "Jetpack Compose", "Dart", "Flutter", "Python", "UI/UX", "C/CD", "Git", "GitHub", "Linux"],
+      "identities": [
+        { "icon": "fas fa-code", "label": "مطور تطبيقات" },
+        { "icon": "fas fa-palette", "label": "مصمم واجهات" },
+        { "icon": "fas fa-mobile-alt", "label": "مطور فلاتر" }
+      ],
+      "cvBtn": "تحميل السيرة الذاتية",
+      "cvLink": "images/education/Mohammed's Resume.pdf",
+      "worksBtn": "استعراض أعمالي"
+    },
+    "education": {
+      "title": "التعليم الأكاديمي",
+      "subtitle": "المسيرة التعليمية والشهادات الجامعية",
+      "items": [
+        {
+          "degree": "بكالوريوس علوم وتربية",
+          "university": "جامعة الزقازيق",
+          "year": "2018 - 2022",
+          "gpa": "معدل 4.5 / 5.0",
+          "description": "تخصص علوم وتربية ."
+        },
+        {
+          "degree": "ثانوية عامة - قسم علوم",
+          "university": "ثانوية المدائن",
+          "year": "2015 - 2018",
+          "gpa": "نسبة 98.3%",
+          "description": "تفوق في المواد العلمية ."
+        }
+      ]
+    },
+    "knowledge": {
+      "title": "المعلومات والمعرفة",
+      "subtitle": "ما أتقنه وما أستطيع تقديمه في مشاريعك",
+      "categories": [
+        {
+          "icon": "fas fa-mobile-alt",
+          "name": "تطوير تطبيقات الجوال",
+          "items": ["Flutter", "Dart", "Java", "Kotlin",  "أداء عالي", "تجربة مستخدم سلسة"]
+        },
+        {
+          "icon": "fas fa-database",
+          "name": "تطوير قواعد البيانات",
+          "items": ["Firebase", "SQLite", "MySQL", "PostgreSQL", "MongoDB"]
+        },
+        {
+          "icon": "fas fa-paint-brush",
+          "name": "التصميم",
+          "items": ["Figma",  "مبادئ UI/UX", "تصميم متجاوب", "أنظمة التصميم"]
+        },
+        {
+          "icon": "fas fa-cloud",
+          "name": "البنية التحتية",
+          "items": ["Docker",  "CI/CD", "Git / GitHub", "Linux"]
+        },
+
+        {
+          "icon": "fas fa-chart-line",
+          "name": "مهارات إضافية",
+          "items": ["الأداء والتحسين",  "إدارة المشاريع", "العمل الجماعي", "حل المشكلات"]
+        }
+      ]
+    },
+    "certificates": {
+      "title": "الشهادات والدورات",
+      "subtitle": "شهادات مهنية ودورات تدريبية معتمدة",
+      "items": [
+        { "name": "Java for Mobile App Development", "org": "ITI Institute", "date": "2022", "icon": "fab fa-java" },
+        { "name": "Learn Java by Building 17 Projects", "org": "Udemy", "date": "2022", "icon": "fab fa-java" },
+        { "name": "Linux Essentials certificate", "org": "Udemy", "date": "2020", "icon": "fab fa-linux" },
+        { "name": "Android Developer Pathway certificate", "org": "ITI Institute", "date": "2023", "icon": "fab fa-android" },
+        { "name": "The Complete Flutter Development Guide", "org": "Udemy", "date": "2023", "icon": "fab fa-flutter" },
+        { "name": "Database Design and Management", "org": "Udemy", "date": "2024", "icon": "fab fa-building" }
+      ]
+    },
+    "projects": {
+      "title": "المشاريع",
+      "subtitle": "نماذج من أعمالي التي أنجزتها",
+      "items": [
+        {
+          "title": "Qr Lens | ماسح الباركود",
+          "description": "تطبيق ماسح الباركود و انشاء الباركود و مشاركتها و تخزينها.",
+          "image": "https://github.com/M4A28/qr_lens/blob/main/assets/icon/icon.png?raw=true",
+          "tags": ["Flutter", "Dart", "Sqlite"],
+          "link": "https://github.com/M4A28/qr_lens/releases/tag/v1.0.1",
+          "github": "https://github.com/M4A28/qr_lens"
+        },
+        {
+          "title": "تطبيق إدارة المحلات",
+          "description": "تطبيق ذكي لإدارة المحلات و العملاء و المبيعات و المشتريات و المخزون و التقارير و التحليلات المتقدمة.",
+          "image": "https://github.com/M4A28/Towmmen/raw/master/app/screen/Screenshot_20240929_164224_com.mohmmed.mosa.eg.towmmen.jpg",
+          "tags": ["Kotlin", "Jetpack Compose", "Sqlite"],
+          "link": "https://github.com/M4A28/Towmmen/releases",
+          "github": "https://github.com/M4A28/Towmmen"
+        },
+        {
+          "title": "مستخرج الالوان من الصور",
+          "description": "تطبيق لاستخراج الالوان من الصور و مشاركتها و تخزينها.",
+          "image": "https://github.com/M4A28/Color_Extractor/blob/main/output/3.jpg_color_palette.png?raw=true",
+          "tags": ["Python", "scikit-learn", "pillow", "matplotlib "],
+          "link": "https://github.com/M4A28/Color_Extractor",
+          "github": "https://github.com/M4A28/Color_Extractor"
+        },
+        {
+          "title": "الصحيحين | صحيح البخاري و مسلم",
+          "description": "تطبيق لعرض صحيح البخاري و مسلم و عرض الاحديث الصحيحة و مشاركتها",
+          "image": "https://github.com/M4A28/Sahihain/blob/master/app/sampledata/Screenshot_20221104_131647.png?raw=true",
+          "tags": ["Java", "xml", "Sqlite"],
+          "link": "https://github.com/M4A28/Sahihain/tree/master/app/release",
+          "github": "https://github.com/M4A28/Sahihain"
+        },
+        {
+          "title": "صانع الشهادات",
+          "description": "تطبيق ذكي لصناعة الشهادات و مشاركتها .",
+          "image": "https://github.com/M4A28/Certificate_Maker/raw/main/Resulting_Image/examble3%40examble.com.png",
+          "tags": ["Python", "pillow", "CSV "],
+          "link": "https://github.com/M4A28/Certificate_Maker",
+          "github": "https://github.com/M4A28/Certificate_Maker"
+        }
+      ]
+    },
+    "tools": {
+      "title": "الأدوات البرمجية",
+      "subtitle": "أدوات قمت بتطويرها ومتاحة للجميع مجاناً",
+      "items": [
+        { "name": "محول الارقام", "desc": "أداة لتحويل الارقام الى كلمات عربية", "icon": "fas fa-asterisk", "link": "tools/numbers.html", "users": "1.3K" },
+        { "name": "مستخرج الالوان", "desc": "أداة لاستخراج الالوان من الصور", "icon": "fas fa-palette", "link": "tools/color_extractor.html", "users": "900" },
+        { "name": "المعايد", "desc": "أداة لصناعة كروت المعايدة", "icon": "fas fa-paint-brush", "link": "tools/HAPPY_EAID/index.html", "users": "3.2K" },
+        { "name": "مستخرج الروابط", "desc": "أداة لاستخراج الروابط من المواقع", "icon": "fas fa-link", "link": "tools/link_extractor.html", "users": "1.6K" },
+        { "name": "منشئ التعبيرات النمطية", "desc": "أداة لبناء التعبيرات النمطية بشكل تفاعلي", "icon": "fas fa-asterisk", "link": "tools/regex-builder.html", "users": "620" }
+        
+      ]
+    },
+    "testing": {
+      "title": "انضم لفريق الاختبار",
+      "subtitle": "ساعدني في تحسين أدواتي ومشاريعي",
+      "description": "أبحث عن أشخاص شغوفين بالتقنية لاختبار أدواتي الجديدة قبل إطلاقها رسمياً. ستكون لك الأولوية في استخدام الميزات الجديدة ومساعدتي في اكتشاف المشاكل وتحسين تجربة المستخدم.",
+      "benefits": [
+        "استخدام مبكر للأدوات والميزات الجديدة",
+        "التأثير المباشر على التطوير",
+        "ذكر اسمك في قائمة المساهمين",
+        "وصول مجاني للميزات المميزة"
+      ],
+      "btn": "انضم الآن لقائمة المختبرين",
+      "btnLink": "https://forms.gle/AmRmpgf5rg1Ki9qq7"
+    },
+    "contact": {
+      "title": "تواصل معي",
+      "subtitle": "هل لديك مشروع أو فكرة؟ دعنا نتحدث",
+      "namePh": "الاسم الكامل",
+      "emailPh": "البريد الإلكتروني",
+      "subjectPh": "الموضوع",
+      "messagePh": "رسالتك...",
+      "sendBtn": "إرسال الرسالة",
+      "successMsg": "تم إرسال رسالتك بنجاح!",
+      "errorMsg": "يرجى ملء جميع الحقول بشكل صحيح."
+    },
+    "footer": {
+      "text": "صُمّم وطُوّر بكل شغف",
+      "madeWith": "صُنع بـ"
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Mohammed Mosa | Mobile App Developer",
+      "logo": "MM"
+    },
+    "nav": {
+      "home": "Home",
+      "education": "Education",
+      "knowledge": "Knowledge",
+      "certificates": "Certificates",
+      "projects": "Projects",
+      "tools": "Tools",
+      "testing": "Testing",
+      "contact": "Contact"
+    },
+    "hero": {
+      "greeting": "Hello, I'm",
+      "name": "Mohammed Mosa",
+      "title": "Mobile App Developer",
+      "bio": "I build exceptional digital experiences that combine high performance with refined design. I believe small details make the big difference.",
+      "phone": "+966 54 829 3542",
+      "email": "mohammed.mosa.eg@gmail.com",
+      "linkedin": "https://linkedin.com/in/mohammed-mosa-eg",
+      "github": "https://github.com/m4a28",
+      "whatsapp": "https://wa.me/message/MXV75QMVKRYZC1",
+      "photo": "images/home/mohammed_mosa.png",
+      "skills": ["Java", "Kotlin","Jetpack Compose", "Dart", "Flutter", "Python", "UI/UX", "C/CD", "Git", "GitHub", "Linux"],
+      "identities": [
+        { "icon": "fas fa-code", "label": "App Developer" },
+        { "icon": "fas fa-palette", "label": "UI Designer" },
+        { "icon": "fas fa-mobile-alt", "label": "Flutter Developer" }
+      ],
+      "cvBtn": "Download CV",
+      "cvLink": "#",
+      "worksBtn": "View My Work"
+    },
+    "education": {
+  "title": "Academic Education",
+  "subtitle": "Educational Journey and University Degrees",
+  "items": [
+    {
+      "degree": "Bachelor of Science and Education",
+      "university": "Zagazig University",
+      "year": "2018 - 2022",
+      "gpa": "GPA 4.5 / 5.0",
+      "description": "Specialization in Science and Education."
+    },
+    {
+      "degree": "High School Diploma - Science Stream",
+      "university": "Al-Madain High School",
+      "year": "2015 - 2018",
+      "gpa": "98.3%",
+      "description": "Excellence in scientific subjects."
+    }
+  ]
+},
+    "knowledge": {
+      "title": "Knowledge & Expertise",
+      "subtitle": "What I master and can deliver in your projects",
+      "categories": [
+  {
+    "icon": "fas fa-mobile-alt",
+    "name": "Mobile App Development",
+    "items": ["Flutter", "Dart", "Java", "Kotlin", "High Performance", "Seamless User Experience"]
+  },
+  {
+    "icon": "fas fa-database",
+    "name": "Database Development",
+    "items": ["Firebase", "SQLite", "MySQL", "PostgreSQL", "MongoDB"]
+  },
+  {
+    "icon": "fas fa-paint-brush",
+    "name": "Design",
+    "items": ["Figma", "UI/UX Principles", "Responsive Design", "Design Systems"]
+  },
+  {
+    "icon": "fas fa-cloud",
+    "name": "Infrastructure",
+    "items": ["Docker", "CI/CD", "Git / GitHub", "Linux"]
+  },
+  {
+    "icon": "fas fa-chart-line",
+    "name": "Additional Skills",
+    "items": ["Performance & Optimization", "Project Management", "Teamwork", "Problem Solving"]
+  }
+]
+    },
+    "certificates": {
+      "title": "Certificates & Courses",
+      "subtitle": "Professional certifications and accredited training courses",
+      "items": [
+        { "name": "Java for Mobile App Development", "org": "ITI Institute", "date": "2022", "icon": "fab fa-java" },
+        { "name": "Learn Java by Building 17 Projects", "org": "Udemy", "date": "2022", "icon": "fab fa-java" },
+        { "name": "Linux Essentials certificate", "org": "Udemy", "date": "2020", "icon": "fab fa-linux" },
+        { "name": "Android Developer Pathway certificate", "org": "ITI Institute", "date": "2023", "icon": "fab fa-android" },
+        { "name": "The Complete Flutter Development Guide", "org": "Udemy", "date": "2023", "icon": "fab fa-flutter" },
+        { "name": "Database Design and Management", "org": "Udemy", "date": "2024", "icon": "fab fa-building" }
+      ]
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Selected samples of my completed work",
+      "items": [
+  {
+    "title": "Qr Lens | Barcode Scanner",
+    "description": "A barcode scanner application to create, share, and store QR codes and barcodes.",
+    "image": "https://github.com/M4A28/qr_lens/blob/main/assets/icon/icon.png?raw=true",
+    "tags": ["Flutter", "Dart", "Sqlite"],
+    "link": "https://github.com/M4A28/qr_lens/releases/tag/v1.0.1",
+    "github": "https://github.com/M4A28/qr_lens"
+  },
+  {
+    "title": "Shop Management App",
+    "description": "A smart application for managing shops, customers, sales, purchases, inventory, reports, and advanced analytics.",
+    "image": "https://github.com/M4A28/Towmmen/raw/master/app/screen/Screenshot_20240929_164224_com.mohmmed.mosa.eg.towmmen.jpg",
+    "tags": ["Kotlin", "Jetpack Compose", "Sqlite"],
+    "link": "https://github.com/M4A28/Towmmen/releases",
+    "github": "https://github.com/M4A28/Towmmen"
+  },
+  {
+    "title": "Image Color Extractor",
+    "description": "An application to extract color palettes from images, share, and store them.",
+    "image": "https://github.com/M4A28/Color_Extractor/blob/main/output/3.jpg_color_palette.png?raw=true",
+    "tags": ["Python", "scikit-learn", "pillow", "matplotlib "],
+    "link": "https://github.com/M4A28/Color_Extractor",
+    "github": "https://github.com/M4A28/Color_Extractor"
+  },
+  {
+    "title": "Sahihain | Sahih Al-Bukhari & Muslim",
+    "description": "An application to display Sahih Al-Bukhari and Muslim, browse authentic Hadiths, and share them.",
+    "image": "https://github.com/M4A28/Sahihain/blob/master/app/sampledata/Screenshot_20221104_131647.png?raw=true",
+    "tags": ["Java", "xml", "Sqlite"],
+    "link": "https://github.com/M4A28/Sahihain/tree/master/app/release",
+    "github": "https://github.com/M4A28/Sahihain"
+  },
+  {
+    "title": "Certificate Maker",
+    "description": "A smart application for generating and sharing professional certificates.",
+    "image": "https://github.com/M4A28/Certificate_Maker/raw/main/Resulting_Image/examble3%40examble.com.png",
+    "tags": ["Python", "pillow", "CSV "],
+    "link": "https://github.com/M4A28/Certificate_Maker",
+    "github": "https://github.com/M4A28/Certificate_Maker"
+  }
+]
+    },
+    "tools": {
+      "title": "Developer Tools",
+      "subtitle": "Tools I built and made available for everyone for free",
+      "items": [
+  {
+    "name": "Number Converter",
+    "desc": "A tool to convert numbers into Arabic words",
+    "icon": "fas fa-asterisk",
+    "link": "tools/numbers.html",
+    "users": "1.3K"
+  },
+  {
+    "name": "Color Extractor",
+    "desc": "A tool to extract color palettes from images",
+    "icon": "fas fa-palette",
+    "link": "tools/color_extractor.html",
+    "users": "900"
+  },
+  {
+    "name": "Greeting Card Maker",
+    "desc": "A tool for creating custom greeting cards",
+    "icon": "fas fa-paint-brush",
+    "link": "tools/HAPPY_EAID/index.html",
+    "users": "3.2K"
+  },
+  {
+    "name": "Link Extractor",
+    "desc": "A tool to extract URLs from websites",
+    "icon": "fas fa-link",
+    "link": "tools/link_extractor.html",
+    "users": "1.6K"
+  },
+  {
+    "name": "Regex Builder",
+    "desc": "An interactive tool for building regular expressions",
+    "icon": "fas fa-asterisk",
+    "link": "tools/regex-builder.html",
+    "users": "620"
+  }
+]
+    },
+    "testing": {
+      "title": "Join the Testing Team",
+      "subtitle": "Help me improve my tools and projects",
+      "description": "I'm looking for tech enthusiasts to test my new tools before official launch. You'll get early access to new features and help me discover issues and improve user experience.",
+      "benefits": [
+        "Early access to tools and new features",
+        "Direct influence on development direction",
+        "Your name in the contributors list",
+        "Free access to premium features"
+      ],
+      "btn": "Join the Testing List Now",
+      "btnLink": "https://forms.gle/AmRmpgf5rg1Ki9qq7"
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "subtitle": "Have a project or idea? Let's talk",
+      "namePh": "Full Name",
+      "emailPh": "Email Address",
+      "subjectPh": "Subject",
+      "messagePh": "Your message...",
+      "sendBtn": "Send Message",
+      "successMsg": "Your message was sent successfully!",
+      "errorMsg": "Please fill in all fields correctly."
+    },
+    "footer": {
+      "text": "Designed and developed with passion",
+      "madeWith": "Made with"
+    }
+  }
+}

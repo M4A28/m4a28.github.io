@@ -1,0 +1,11 @@
+<svg width="1320" height="1839" viewBox="0 0 1320 1839" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1320" height="1839" fill="#1A1A1A"/>
+  <defs>
+    <pattern id="dark-geo" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+      <path d="M60 10 L75 45 L110 60 L75 75 L60 110 L45 75 L10 60 L45 45 Z" stroke="#D4AF37" stroke-width="0.7" fill="none" opacity="0.4"/>
+    </pattern>
+  </defs>
+  <rect width="1320" height="1839" fill="url(#dark-geo)"/>
+  <rect x="50" y="50" width="1220" height="1739" stroke="#D4AF37" stroke-width="6" fill="none" rx="15"/>
+  <path d="M50 250 L50 50 L250 50" stroke="#FFD700" stroke-width="12" fill="none"/>
+</svg>

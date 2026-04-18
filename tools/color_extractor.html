@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مستخرج الألوان الذكي v2</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 min-h-screen py-10 px-4">
+
+    <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-slate-800 mb-2">مستخرج الألوان المتعددة</h1>
+            <p class="text-slate-500">تم تحديث الخوارزمية لاستخراج ألوان متنوعة ومتميزة حسب العدد المطلوب</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-1 space-y-6">
+                <div id="dropZone"
+                    class="border-4 border-dashed border-slate-200 rounded-3xl p-8 text-center cursor-pointer hover:bg-white transition-all bg-white/50">
+                    <input type="file" id="fileInput" class="hidden" accept="image/*">
+                    <p class="text-slate-600 font-bold">ارفع الصورة هنا</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                    <label class="block text-slate-700 font-bold mb-4">عدد الألوان المطلوبة: <span id="countVal"
+                            class="text-blue-600">8</span></label>
+                    <input type="range" id="colorRange" min="2" max="20" value="8"
+                        class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+
+                    <div class="mt-8 grid grid-cols-2 gap-2">
+                        <button onclick="exportCSS()"
+                            class="bg-slate-800 text-white p-3 rounded-xl text-sm font-bold hover:bg-black transition">CSS</button>
+                        <button onclick="exportJSON()"
+                            class="bg-blue-600 text-white p-3 rounded-xl text-sm font-bold hover:bg-blue-700 transition">JSON</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-6">
+                <div id="resultContainer" class="hidden space-y-6">
+                    <div class="bg-white p-4 rounded-3xl shadow-sm border border-slate-100">
+                        <img id="imagePreview" class="w-full h-auto max-h-[400px] object-contain rounded-2xl">
+                    </div>
+                    <div id="paletteGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const dropZone = document.getElementById('dropZone');
+        const imagePreview = document.getElementById('imagePreview');
+        const paletteGrid = document.getElementById('paletteGrid');
+        const colorRange = document.getElementById('colorRange');
+        const countVal = document.getElementById('countVal');
+
+        let currentPalette = [];
+
+        dropZone.onclick = () => fileInput.click();
+        colorRange.oninput = (e) => {
+            countVal.innerText = e.target.value;
+            if (imagePreview.src) processImage(imagePreview.src);
+        };
+
+        fileInput.onchange = (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => processImage(event.target.result);
+                reader.readAsDataURL(file);
+            }
+        };
+
+        function processImage(src) {
+            imagePreview.src = src;
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                // تصغير الصورة لزيادة دقة التحليل اللوني وتقليل التكرار
+                canvas.width = 150; canvas.height = 150;
+                ctx.drawImage(img, 0, 0, 150, 150);
+                const pixels = ctx.getImageData(0, 0, 150, 150).data;
+
+                currentPalette = getSmartPalette(pixels, parseInt(colorRange.value));
+                renderPalette();
+                document.getElementById('resultContainer').classList.remove('hidden');
+            };
+            img.src = src;
+        }
+
+        // خوارزمية ذكية لتجميع الألوان المتشابهة (Color Grouping)
+        function getSmartPalette(pixels, count) {
+            const colorCounts = {};
+            // الخطوة 1: تقليل الدقة اللونية لتجميع الدرجات المتقاربة (Color Quantization)
+            for (let i = 0; i < pixels.length; i += 4) {
+                const r = Math.round(pixels[i] / 10) * 10;
+                const g = Math.round(pixels[i + 1] / 10) * 10;
+                const b = Math.round(pixels[i + 2] / 10) * 10;
+                const rgb = `${r},${g},${b}`;
+                colorCounts[rgb] = (colorCounts[rgb] || 0) + 1;
+            }
+
+            // الخطوة 2: ترتيب الألوان حسب الأكثر تكراراً
+            const sortedColors = Object.keys(colorCounts).sort((a, b) => colorCounts[b] - colorCounts[a]);
+
+            // الخطوة 3: اختيار الألوان الأكثر تميزاً (تجنب اختيار ألوان قريبة جداً من بعضها)
+            const finalPalette = [];
+            for (let rgbStr of sortedColors) {
+                if (finalPalette.length >= count) break;
+
+                const rgb = rgbStr.split(',').map(Number);
+                const hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
+
+                // التأكد من أن اللون الجديد ليس شديد القرب من الألوان المختارة سابقاً
+                const isTooSimilar = finalPalette.some(existingHex => {
+                    const eRgb = hexToRgb(existingHex);
+                    const distance = Math.sqrt(
+                        Math.pow(rgb[0] - eRgb.r, 2) +
+                        Math.pow(rgb[1] - eRgb.g, 2) +
+                        Math.pow(rgb[2] - eRgb.b, 2)
+                    );
+                    return distance < 30; // معامل المسافة اللونية
+                });
+
+                if (!isTooSimilar) finalPalette.push(hex);
+            }
+            return finalPalette;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + [r, g, b].map(x => Math.min(255, Math.max(0, x)).toString(16).padStart(2, '0')).join("");
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function renderPalette() {
+            paletteGrid.innerHTML = '';
+            currentPalette.forEach(hex => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-2 rounded-xl shadow-sm border border-slate-100 text-center";
+                card.innerHTML = `
+                    <div class="h-16 rounded-lg mb-2" style="background-color: ${hex}"></div>
+                    <span class="text-xs font-mono font-bold">${hex.toUpperCase()}</span>
+                `;
+                paletteGrid.appendChild(card);
+            });
+        }
+
+        function exportCSS() {
+            let css = ":root {\n" + currentPalette.map((h, i) => `  --color-${i + 1}: ${h};`).join('\n') + "\n}";
+            download(css, 'theme.css');
+        }
+
+        function exportJSON() {
+            download(JSON.stringify(currentPalette, null, 2), 'palette.json');
+        }
+
+        function download(content, name) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = name;
+            a.click();
+        }
+    </script>
+</body>
+
+</html>

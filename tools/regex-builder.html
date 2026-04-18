@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Regex Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f12;
+    --surface: #161920;
+    --surface2: #1e2229;
+    --surface3: #262c35;
+    --border: #2a3040;
+    --border2: #3a4455;
+    --text: #e8edf5;
+    --muted: #6b7a94;
+    --faint: #3a4455;
+    --accent: #4f8ef7;
+    --accent-glow: rgba(79,142,247,0.15);
+    --amber: #f5a623;
+    --amber-bg: rgba(245,166,35,0.12);
+    --green: #4caf7d;
+    --green-bg: rgba(76,175,125,0.1);
+    --red: #e05c5c;
+    --red-bg: rgba(224,92,92,0.1);
+    --match1-bg: rgba(79,142,247,0.35);
+    --match1-border: #4f8ef7;
+    --matchn-bg: rgba(245,166,35,0.3);
+    --matchn-border: #f5a623;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  html { background: var(--bg); }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .app {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem 4rem;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.4s ease both;
+  }
+  .header-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid rgba(79,142,247,0.3);
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-weight: 400;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.4s ease both;
+  }
+  .card:nth-child(2) { animation-delay: 0.05s; }
+  .card:nth-child(3) { animation-delay: 0.1s; }
+  .card:nth-child(4) { animation-delay: 0.15s; }
+  .card:nth-child(5) { animation-delay: 0.2s; }
+
+  .card-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* Pattern Row */
+  .pattern-row {
+    display: flex;
+    align-items: center;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .pattern-row:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .pattern-row.error { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-bg); }
+
+  .delim {
+    padding: 0 12px;
+    font-family: var(--mono);
+    font-size: 22px;
+    color: var(--muted);
+    background: var(--surface3);
+    height: 46px;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    border-right: 1px solid var(--border);
+  }
+  .delim.right { border-right: none; border-left: 1px solid var(--border); }
+
+  #pattern-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 16px;
+    padding: 0 14px;
+    height: 46px;
+    caret-color: var(--accent);
+  }
+  #pattern-input::placeholder { color: var(--faint); }
+
+  .flags-area {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 10px;
+    background: var(--surface3);
+    height: 46px;
+    border-left: 1px solid var(--border);
+  }
+  .flag-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.12s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flag-btn:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+  .flag-btn.active {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .flag-btn[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface3);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-size: 11px;
+    font-family: var(--sans);
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .flag-btn { position: relative; }
+
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    min-height: 18px;
+  }
+  .status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--faint);
+  }
+  .status-bar.ok .status-dot { background: var(--green); }
+  .status-bar.error .status-dot { background: var(--red); }
+  .status-text { color: var(--muted); }
+  .status-bar.ok .status-text { color: var(--green); }
+  .status-bar.error .status-text { color: var(--red); }
+
+  /* Textarea */
+  .test-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    padding: 12px 14px;
+    resize: vertical;
+    min-height: 120px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .test-input:focus { border-color: var(--border2); }
+
+  /* Highlighted output */
+  .output-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 60px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: var(--text);
+  }
+  .output-box mark.m1 {
+    background: var(--match1-bg);
+    border-bottom: 2px solid var(--match1-border);
+    color: var(--text);
+    border-radius: 3px;
+    padding: 1px 0;
+  }
+  .output-box mark.mn {
+    background: var(--matchn-bg);
+    border-bottom: 2px solid var(--matchn-border);
+    color: var(--text);
+    border-radius: 3px;
+    padding: 1px 0;
+  }
+  .no-match-msg {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 13px;
+    font-family: var(--sans);
+  }
+
+  /* Stats */
+  .stats-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .stat {
+    font-size: 12px;
+    font-family: var(--mono);
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: var(--surface3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .stat b { color: var(--text); font-weight: 500; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+  .legend-swatch {
+    width: 16px; height: 10px;
+    border-radius: 2px;
+    border-bottom: 2px solid;
+  }
+  .swatch-first { background: var(--match1-bg); border-color: var(--match1-border); }
+  .swatch-rest { background: var(--matchn-bg); border-color: var(--matchn-border); }
+
+  /* Groups */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .group-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .group-card .g-num {
+    font-size: 11px;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .group-card .g-val {
+    font-size: 13px;
+    font-family: var(--mono);
+    color: var(--text);
+    margin-top: 3px;
+    word-break: break-all;
+  }
+  .group-card .g-val.empty { color: var(--muted); font-style: italic; }
+
+  /* Cheatsheet */
+  .cs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 4px;
+  }
+  .cs-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.1s;
+    border: 1px solid transparent;
+  }
+  .cs-item:hover {
+    background: var(--surface2);
+    border-color: var(--border);
+  }
+  .cs-token {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    min-width: 56px;
+    font-weight: 500;
+  }
+  .cs-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--sans);
+  }
+
+  /* Two-col layout */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .app { padding: 1.5rem 1rem 3rem; }
+    .header h1 { font-size: 24px; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <div>
+      <div class="header-badge">REGEX BUILDER</div>
+      <h1>Pattern Lab</h1>
+      <p>Build and test regular expressions interactively</p>
+    </div>
+  </div>
+
+  <!-- Pattern Input -->
+  <div class="card">
+    <div class="card-label">Pattern</div>
+    <div class="pattern-row" id="pattern-row">
+      <div class="delim">/</div>
+      <input type="text" id="pattern-input" placeholder="Enter your regex pattern…" spellcheck="false" autocomplete="off" autocorrect="off">
+      <div class="flags-area" id="flags-area">
+        <button class="flag-btn active" data-flag="g" title="global — find all matches">g</button>
+        <button class="flag-btn" data-flag="i" title="case insensitive">i</button>
+        <button class="flag-btn" data-flag="m" title="multiline — ^ and $ match line boundaries">m</button>
+        <button class="flag-btn" data-flag="s" title="dotAll — dot matches newlines">s</button>
+      </div>
+      <div class="delim right" id="flags-display">/g</div>
+    </div>
+    <div class="status-bar" id="status-bar">
+      <div class="status-dot"></div>
+      <div class="status-text" id="status-text">Enter a pattern to begin</div>
+    </div>
+  </div>
+
+  <!-- Test Input + Output side by side -->
+  <div class="two-col">
+    <div class="card">
+      <div class="card-label">Test string</div>
+      <textarea class="test-input" id="test-input" placeholder="Paste text to test against your pattern…" spellcheck="false"></textarea>
+    </div>
+    <div class="card">
+      <div class="card-label">Highlighted matches</div>
+      <div class="output-box" id="output-box"></div>
+      <div class="legend" id="legend" style="display:none">
+        <div class="legend-item"><div class="legend-swatch swatch-first"></div>first match</div>
+        <div class="legend-item"><div class="legend-swatch swatch-rest"></div>other matches</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats + Groups -->
+  <div class="card" id="stats-card" style="display:none">
+    <div class="card-label">Results</div>
+    <div class="stats-row" id="stats-row"></div>
+    <div id="groups-section" style="display:none; margin-top:1rem;">
+      <div class="card-label" style="margin-bottom:8px;">Capture groups (match 1)</div>
+      <div class="groups-grid" id="groups-grid"></div>
+    </div>
+  </div>
+
+  <!-- Cheatsheet -->
+  <div class="card">
+    <div class="card-label">Cheatsheet — click to insert at cursor</div>
+    <div class="cs-grid" id="cs-grid"></div>
+  </div>
+
+</div>
+
+<script>
+const patternInput = document.getElementById('pattern-input');
+const testInput = document.getElementById('test-input');
+const outputBox = document.getElementById('output-box');
+const statusBar = document.getElementById('status-bar');
+const statusText = document.getElementById('status-text');
+const patternRow = document.getElementById('pattern-row');
+const flagsDisplay = document.getElementById('flags-display');
+const statsCard = document.getElementById('stats-card');
+const statsRow = document.getElementById('stats-row');
+const groupsSection = document.getElementById('groups-section');
+const groupsGrid = document.getElementById('groups-grid');
+const legend = document.getElementById('legend');
+
+const CS = [
+  ['.','any character'],['\\d','digit 0–9'],['\\D','non-digit'],
+  ['\\w','word char [a-zA-Z0-9_]'],['\\W','non-word char'],
+  ['\\s','whitespace'],['\\S','non-whitespace'],
+  ['\\b','word boundary'],['\\B','non-word boundary'],
+  ['^','start of string/line'],['$','end of string/line'],
+  ['[abc]','character class'],['[^abc]','negated class'],
+  ['[a-z]','range class'],['(abc)','capture group'],
+  ['(?:abc)','non-capture group'],['(?<name>abc)','named group'],
+  ['a|b','alternation (or)'],['a*','0 or more (greedy)'],
+  ['a+','1 or more (greedy)'],['a?','0 or 1'],
+  ['a*?','0 or more (lazy)'],['a+?','1 or more (lazy)'],
+  ['a{3}','exactly 3'],['a{2,4}','2 to 4'],
+  ['(?=abc)','positive lookahead'],['(?!abc)','negative lookahead'],
+  ['(?<=abc)','positive lookbehind'],['(?<!abc)','negative lookbehind'],
+  ['\\1','backreference to group 1'],['\\n','newline'],
+];
+
+const grid = document.getElementById('cs-grid');
+CS.forEach(([tok, desc]) => {
+  const el = document.createElement('div');
+  el.className = 'cs-item';
+  el.innerHTML = `<span class="cs-token">${esc(tok)}</span><span class="cs-desc">${esc(desc)}</span>`;
+  el.addEventListener('click', () => {
+    const s = patternInput.selectionStart, e = patternInput.selectionEnd;
+    const v = patternInput.value;
+    patternInput.value = v.slice(0, s) + tok + v.slice(e);
+    patternInput.focus();
+    patternInput.setSelectionRange(s + tok.length, s + tok.length);
+    run();
+  });
+  grid.appendChild(el);
+});
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function getFlags() {
+  return [...document.querySelectorAll('.flag-btn')]
+    .filter(b => b.classList.contains('active'))
+    .map(b => b.dataset.flag).join('');
+}
+
+document.querySelectorAll('.flag-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('active');
+    flagsDisplay.textContent = '/' + getFlags();
+    run();
+  });
+});
+
+function run() {
+  const pattern = patternInput.value.trim();
+  const text = testInput.value;
+  const flags = getFlags();
+  flagsDisplay.textContent = '/' + flags;
+
+  if (!pattern) {
+    setStatus('neutral', 'Enter a pattern to begin');
+    patternRow.className = 'pattern-row';
+    outputBox.textContent = text || '';
+    statsCard.style.display = 'none';
+    legend.style.display = 'none';
+    return;
+  }
+
+  let regex;
+  try {
+    const f = flags.includes('g') ? flags : flags + 'g';
+    regex = new RegExp(pattern, f);
+    setStatus('ok', 'Valid pattern');
+    patternRow.className = 'pattern-row';
+  } catch(e) {
+    setStatus('error', e.message);
+    patternRow.className = 'pattern-row error';
+    outputBox.textContent = text || '';
+    statsCard.style.display = 'none';
+    legend.style.display = 'none';
+    return;
+  }
+
+  if (!text) {
+    outputBox.textContent = '';
+    statsCard.style.display = 'none';
+    legend.style.display = 'none';
+    return;
+  }
+
+  const matches = [...text.matchAll(regex)];
+  statsCard.style.display = 'block';
+
+  if (!matches.length) {
+    outputBox.innerHTML = esc(text);
+    statsRow.innerHTML = `<div class="stat">0 matches</div>`;
+    groupsSection.style.display = 'none';
+    legend.style.display = 'none';
+    return;
+  }
+
+  // Build highlighted HTML
+  let html = '', last = 0;
+  matches.forEach((m, i) => {
+    html += esc(text.slice(last, m.index));
+    html += `<mark class="${i === 0 ? 'm1' : 'mn'}">${esc(m[0])}</mark>`;
+    last = m.index + m[0].length;
+  });
+  html += esc(text.slice(last));
+  outputBox.innerHTML = html;
+  legend.style.display = 'flex';
+
+  const totalChars = matches.reduce((a, m) => a + m[0].length, 0);
+  const uniqueVals = new Set(matches.map(m => m[0])).size;
+  statsRow.innerHTML = `
+    <div class="stat"><b>${matches.length}</b> match${matches.length !== 1 ? 'es' : ''}</div>
+    <div class="stat"><b>${totalChars}</b> chars matched</div>
+    <div class="stat">first at index <b>${matches[0].index}</b></div>
+    <div class="stat"><b>${uniqueVals}</b> unique value${uniqueVals !== 1 ? 's' : ''}</div>
+  `;
+
+  // Groups
+  const gc = matches[0].length - 1;
+  if (gc > 0) {
+    groupsSection.style.display = 'block';
+    groupsGrid.innerHTML = '';
+    const m0 = matches[0];
+    for (let i = 1; i <= gc; i++) {
+      const card = document.createElement('div');
+      card.className = 'group-card';
+      const val = m0[i];
+      card.innerHTML = `<div class="g-num">Group ${i}</div><div class="g-val${val === undefined ? ' empty' : ''}">${val !== undefined ? esc(val) : 'unmatched'}</div>`;
+      groupsGrid.appendChild(card);
+    }
+    // Named groups
+    const named = m0.groups;
+    if (named) {
+      Object.entries(named).forEach(([name, val]) => {
+        const card = document.createElement('div');
+        card.className = 'group-card';
+        card.innerHTML = `<div class="g-num">?&lt;${esc(name)}&gt;</div><div class="g-val${val === undefined ? ' empty' : ''}">${val !== undefined ? esc(val) : 'unmatched'}</div>`;
+        groupsGrid.appendChild(card);
+      });
+    }
+  } else {
+    groupsSection.style.display = 'none';
+  }
+}
+
+function setStatus(type, msg) {
+  statusBar.className = 'status-bar ' + type;
+  statusText.textContent = msg;
+}
+
+patternInput.addEventListener('input', run);
+testInput.addEventListener('input', run);
+
+// Defaults
+patternInput.value = '\\b[A-Z][a-z]+\\b';
+testInput.value = 'The quick Brown Fox jumped over the Lazy Dog near the River Bank on a Sunny Tuesday.';
+run();
+</script>
+</body>
+</html>
