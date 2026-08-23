@@ -45,13 +45,6 @@
           "year": "2018 - 2022",
           "gpa": "معدل 4.5 / 5.0",
           "description": "تخصص علوم وتربية ."
-        },
-        {
-          "degree": "ثانوية عامة - قسم علوم",
-          "university": "ثانوية المدائن",
-          "year": "2015 - 2018",
-          "gpa": "نسبة 98.3%",
-          "description": "تفوق في المواد العلمية ."
         }
       ]
     },
@@ -62,7 +55,7 @@
         {
           "icon": "fas fa-mobile-alt",
           "name": "تطوير تطبيقات الجوال",
-          "items": ["Flutter", "Dart", "Java", "Kotlin",  "أداء عالي", "تجربة مستخدم سلسة"]
+          "items": ["Flutter", "Dart", "Java", "Kotlin"]
         },
         {
           "icon": "fas fa-database",
@@ -83,7 +76,7 @@
         {
           "icon": "fas fa-chart-line",
           "name": "مهارات إضافية",
-          "items": ["الأداء والتحسين",  "إدارة المشاريع", "العمل الجماعي", "حل المشكلات"]
+          "items": ["الأداء والتحسين",  "العمل الجماعي", "حل المشكلات"]
         }
       ]
     },
@@ -233,13 +226,6 @@
       "year": "2018 - 2022",
       "gpa": "GPA 4.5 / 5.0",
       "description": "Specialization in Science and Education."
-    },
-    {
-      "degree": "High School Diploma - Science Stream",
-      "university": "Al-Madain High School",
-      "year": "2015 - 2018",
-      "gpa": "98.3%",
-      "description": "Excellence in scientific subjects."
     }
   ]
 },
@@ -250,12 +236,12 @@
   {
     "icon": "fas fa-mobile-alt",
     "name": "Mobile App Development",
-    "items": ["Flutter", "Dart", "Java", "Kotlin", "High Performance", "Seamless User Experience"]
+    "items": ["Flutter", "Dart", "Java", "Kotlin"]
   },
   {
     "icon": "fas fa-database",
     "name": "Database Development",
-    "items": ["Firebase", "SQLite", "MySQL", "PostgreSQL", "MongoDB"]
+    "items": ["Firebase", "SQLite", "MySQL", "PostgreSQL"]
   },
   {
     "icon": "fas fa-paint-brush",
