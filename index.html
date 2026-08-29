@@ -1,79 +1,67 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" data-theme="dark">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Mohammed Mosa</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script>
-    tailwind.config =   {
-        theme: {
-            extend: {
-                fontFamily: {
-                    ar: ['Cairo', 'sans-serif'],
-                    en: ['Outfit', 'sans-serif'],
-                }
-            }
-      }
-    }
-    </script>
-    <link rel="stylesheet" href="style.css">
+    <title>محمد موسى | مطور تطبيقات</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- شريط علوي زخرفي -->
+
+    <!-- ===== TOP ACCENT BAR ===== -->
     <div class="top-accent-bar"></div>
 
-    <!-- === النافبار === -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="navbar" id="navbar">
-        <div class="max-w-6xl mx-auto flex items-center justify-between">
-            <a href="#hero" class="text-lg font-bold" style="color: var(--accent); font-family: var(--font-display);">
-                <span id="navLogo">MM</span>
-            </a>
-            <div class="hidden md:flex items-center gap-1" id="navLinks"></div>
-            <div class="flex items-center gap-2">
-                <!-- تبديل اللغة -->
-                <button onclick="toggleLang()" id="langBtn"
-                    class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold transition-all"
-                    style="background: var(--accent-muted); color: var(--accent); border: 1px solid var(--border);"
-                    aria-label="تبديل اللغة">EN</button>
-                <!-- تبديل الثيم -->
-                <button onclick="toggleTheme()" id="themeBtn"
-                    class="w-9 h-9 rounded-lg flex items-center justify-center text-sm transition-all"
-                    style="background: var(--accent-muted); color: var(--accent); border: 1px solid var(--border);"
-                    aria-label="تبديل الوضع">
-                    <i class="fas fa-sun"></i>
+        <div class="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
+            <a href="#hero" class="font-black text-base tracking-tight" style="color:var(--fg);" id="navLogo">م</a>
+            <div class="hidden md:flex items-center gap-8" id="navLinks"></div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleTheme()" id="themeBtn" class="w-8 h-8 flex items-center justify-center" style="color:var(--fg-sec);" aria-label="Toggle theme">
+                    <span class="iconify" data-icon="mdi:weather-sunny" data-width="16" id="themeIcon"></span>
                 </button>
-                <!-- زر الموبايل -->
-                <button onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 rounded-lg flex items-center justify-center"
-                    style="background: var(--accent-muted); color: var(--accent); border: 1px solid var(--border);"
-                    aria-label="القائمة">
-                    <i class="fas fa-bars"></i>
+                <button onclick="toggleLang()" id="langBtn" class="text-[10px] font-bold tracking-widest" style="color:var(--fg-sec); border: 1px solid var(--border); padding: 0.25rem 0.6rem;">EN</button>
+                <button onclick="toggleMobileMenu()" class="md:hidden w-8 h-8 flex flex-col items-end justify-center gap-1.5" id="menuBtn" aria-label="Menu">
+                    <span class="block w-5 h-[1.5px] transition-all duration-300" style="background:var(--fg);" id="ml1"></span>
+                    <span class="block w-3.5 h-[1.5px] transition-all duration-300" style="background:var(--fg);" id="ml2"></span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- قائمة الموبايل -->
+    <!-- ===== MOBILE MENU ===== -->
     <div class="mobile-menu" id="mobileMenu">
-        <button onclick="toggleMobileMenu()" class="absolute top-6 right-6 w-10 h-10 rounded-lg flex items-center justify-center"
-            style="background: var(--accent-muted); color: var(--accent);" aria-label="إغلاق">
-            <i class="fas fa-times text-lg"></i>
-        </button>
-        <div id="mobileNavLinks" class="flex flex-col items-center gap-1"></div>
+        <div id="mobileNavLinks"></div>
     </div>
 
-    <!-- === المحتوى الرئيسي === -->
-    <main id="mainContent"></main>
-
-    <!-- === الفوتر === -->
-    <footer id="footer" class="text-center py-8" style="border-top: 1px solid var(--border);"></footer>
-
-    <!-- التوست -->
+    <!-- ===== TOAST ===== -->
     <div class="toast" id="toast"></div>
 
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="mainContent"></main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="footer" class="border-t" style="border-color:var(--border);"></footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <button id="backToTop" aria-label="Back to top">
+        <span class="iconify" data-icon="mdi:arrow-up" data-width="16"></span>
+    </button>
+
+    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
 </html>
