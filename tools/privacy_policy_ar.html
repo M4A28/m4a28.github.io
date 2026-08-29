@@ -3,220 +3,1126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سياسة الخصوصية</title>
+
+    <title>سياسة الخصوصية — Privacy Policy</title>
+
     <style>
+        /* =========================================
+           SWISS MINIMAL PRIVACY PAGE
+           Arabic / English
+           ========================================= */
+
+        :root {
+            --black: #111;
+            --text: #252525;
+            --muted: #777;
+            --line: #dedede;
+            --paper: #f5f5f3;
+            --white: #fff;
+            --accent: #e30613;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        h2 {
-            color: #34495e;
-            margin: 30px 0 15px 0;
-            font-size: 1.4rem;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #667eea;
-            position: relative;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 50px;
-            height: 2px;
-            background: #764ba2;
-        }
-        
-        p {
-            margin-bottom: 15px;
-            text-align: justify;
-            font-size: 1.1rem;
+            background: var(--paper);
+            color: var(--text);
+            font-family:
+                "Noto Sans Arabic",
+                "Segoe UI",
+                Arial,
+                sans-serif;
             line-height: 1.8;
         }
-        
-        .highlight {
-            background: linear-gradient(120deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 20px;
-            border-radius: 15px;
-            border-right: 4px solid #667eea;
-            margin: 20px 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+
+        button {
+            font: inherit;
         }
-        
-        .contact-info {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 30px;
-            text-align: center;
+
+        /* =========================================
+           LANGUAGE SWITCHER
+           ========================================= */
+
+        .language-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(245, 245, 243, 0.94);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(12px);
         }
-        
-        .contact-info h3 {
+
+        .language-inner {
+            width: min(100% - 40px, 1080px);
+            margin: auto;
+            height: 64px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--black);
+        }
+
+        .language-switch {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: var(--white);
+            border: 1px solid var(--line);
+        }
+
+        .language-switch button {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+
+            padding: 7px 14px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .04em;
+
+            transition:
+                background .2s ease,
+                color .2s ease;
+        }
+
+        .language-switch button.active {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .language-switch button:hover {
+            color: var(--black);
+        }
+
+        /* =========================================
+           PAGE
+           ========================================= */
+
+        .page {
+            width: min(100% - 40px, 1080px);
+            margin: auto;
+            padding: 80px 0 70px;
+        }
+
+        /* =========================================
+           HERO
+           ========================================= */
+
+        .hero {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 35px;
+
+            padding-bottom: 55px;
+            border-bottom: 8px solid var(--black);
+        }
+
+        .hero-index {
+            color: var(--accent);
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 900;
+            padding-top: 10px;
+        }
+
+        .hero-content {
+            max-width: 820px;
+        }
+
+        .eyebrow {
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .08em;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            color: var(--black);
+            font-size: clamp(48px, 8vw, 92px);
+            line-height: .98;
+            font-weight: 900;
+            letter-spacing: -.055em;
+            margin-bottom: 32px;
+        }
+
+        .hero-description {
+            max-width: 720px;
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        /* =========================================
+           SUMMARY
+           ========================================= */
+
+        .summary {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 35px;
+
+            padding: 32px 0;
+            border-bottom: 1px solid var(--black);
+        }
+
+        .summary-label,
+        .section-index,
+        .contact-label {
+            color: var(--accent);
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: .06em;
+        }
+
+        .summary-text {
+            max-width: 760px;
+            font-size: 19px;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           SECTIONS
+           ========================================= */
+
+        .section {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 35px;
+
+            padding: 38px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .section-content {
+            max-width: 760px;
+        }
+
+        h2 {
+            color: var(--black);
+            font-size: 27px;
+            line-height: 1.25;
+            font-weight: 900;
+            letter-spacing: -.025em;
             margin-bottom: 15px;
-            font-size: 1.3rem;
         }
-        
-        .date {
-            text-align: center;
-            color: #7f8c8d;
-            font-style: italic;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ecf0f1;
+
+        .section-content p {
+            margin-bottom: 14px;
         }
-        
-        .icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            margin-left: 10px;
-            vertical-align: middle;
+
+        .section-content p:last-child {
+            margin-bottom: 0;
         }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
+
+        /* =========================================
+           LIST
+           ========================================= */
+
+        ul {
+            list-style: none;
+            margin-top: 22px;
+            border-top: 1px solid var(--line);
+        }
+
+        li {
+            position: relative;
+            padding: 12px 25px 12px 0;
+            border-bottom: 1px solid var(--line);
+        }
+
+        li::before {
+            content: "—";
+            position: absolute;
+            right: 0;
+            color: var(--accent);
+            font-weight: 900;
+        }
+
+        /* =========================================
+           CONTACT
+           ========================================= */
+
+        .contact {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 35px;
+
+            margin-top: 70px;
+            padding: 35px 0;
+
+            border-top: 8px solid var(--black);
+            border-bottom: 1px solid var(--black);
+        }
+
+        .contact-content {
+            max-width: 760px;
+        }
+
+        .contact h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            margin-bottom: 8px;
+        }
+
+        .contact a {
+            color: var(--black);
+            font-weight: 700;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .contact a:hover {
+            color: var(--accent);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+
+            padding: 28px 0 0;
+
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        footer strong {
+            color: var(--black);
+        }
+
+        /* =========================================
+           ENGLISH MODE
+           ========================================= */
+
+        html[lang="en"] body {
+            font-family:
+                Inter,
+                Helvetica Neue,
+                Helvetica,
+                Arial,
+                sans-serif;
+            direction: ltr;
+        }
+
+        html[lang="en"] .hero,
+        html[lang="en"] .summary,
+        html[lang="en"] .section,
+        html[lang="en"] .contact {
+            direction: ltr;
+        }
+
+        html[lang="en"] .hero-index,
+        html[lang="en"] .section-index {
+            text-align: left;
+        }
+
+        html[lang="en"] li {
+            padding: 12px 0 12px 25px;
+        }
+
+        html[lang="en"] li::before {
+            right: auto;
+            left: 0;
+        }
+
+        /* =========================================
+           HIDDEN LANGUAGE
+           ========================================= */
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
+
+        @media (max-width: 700px) {
+
+            .language-inner,
+            .page {
+                width: min(100% - 28px, 1080px);
             }
-            
+
+            .page {
+                padding-top: 45px;
+            }
+
+            .hero,
+            .summary,
+            .section,
+            .contact {
+                grid-template-columns: 45px 1fr;
+                gap: 18px;
+            }
+
+            .hero {
+                padding-bottom: 40px;
+            }
+
             h1 {
-                font-size: 2rem;
+                font-size: 52px;
             }
-            
+
+            .hero-description {
+                font-size: 17px;
+            }
+
+            .summary-text {
+                font-size: 16px;
+            }
+
             h2 {
-                font-size: 1.2rem;
+                font-size: 22px;
             }
-            
-            p {
-                font-size: 1rem;
+
+            .contact {
+                margin-top: 45px;
+            }
+
+            .contact h2 {
+                font-size: 30px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 7px;
             }
         }
-        
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 420px) {
+
+            .language-inner {
+                height: 58px;
+            }
+
+            .brand {
+                font-size: 11px;
+            }
+
+            .language-switch button {
+                padding: 6px 10px;
+            }
+
+            h1 {
+                font-size: 45px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container fade-in">
-        <h1>🔒 سياسة الخصوصية</h1>
-        
-        <div class="highlight">
-            <p><strong>ملخص سريع:</strong> تطبيقنا لا يجمع أي بيانات شخصية، ولا يحتوي على إعلانات، ومناسب لجميع الأعمار. خصوصيتك محمية بالكامل.</p>
-        </div>
 
-        <h2>📱 مقدمة</h2>
-        <p>نحن نقدر خصوصيتك ونلتزم بحمايتها. هذه السياسة توضح كيفية تعاملنا مع المعلومات عند استخدامك لتطبيقنا المتوفر على متجر Google Play.</p>
+    <!-- LANGUAGE BAR -->
+    <div class="language-bar">
+        <div class="language-inner">
 
-        <h2>📊 جمع البيانات</h2>
-        <p>تطبيقنا <strong>لا يجمع أي بيانات شخصية</strong> من المستخدمين. نحن لا نطلب منك تسجيل الدخول، ولا نصل إلى:</p>
-        <ul style="margin-right: 30px; margin-bottom: 15px;">
-            <li>معلومات الاتصال (الاسم، البريد الإلكتروني، رقم الهاتف)</li>
-            <li>موقعك الجغرافي</li>
-            <li>جهات الاتصال في هاتفك</li>
-            <li>الصور أو الملفات المخزنة على جهازك</li>
-            <li>معلومات الجهاز الشخصية</li>
-        </ul>
+            <div class="brand">
+                Privacy / 01
+            </div>
 
-        <h2>📈 التحليلات والإحصائيات</h2>
-        <p>لا نستخدم أي أدوات تحليل أو إحصائيات تجمع معلومات عن استخدامك للتطبيق. كل ما تفعله في التطبيق يبقى على جهازك فقط.</p>
+            <div class="language-switch">
+                <button
+                    id="arButton"
+                    class="active"
+                    onclick="setLanguage('ar')">
+                    العربية
+                </button>
 
-        <h2>🚫 الإعلانات</h2>
-        <p>تطبيقنا خالٍ تماماً من الإعلانات. لن تشاهد أي إعلانات، ولن نشارك معلوماتك مع شركات الإعلان.</p>
+                <button
+                    id="enButton"
+                    onclick="setLanguage('en')">
+                    EN
+                </button>
+            </div>
 
-        <h2>👨‍👩‍👧‍👦 الأمان للأطفال</h2>
-        <p>تطبيقنا مناسب وآمن لجميع الفئات العمرية بما في ذلك الأطفال دون سن 13 عاماً، لأنه لا يجمع أي معلومات شخصية ولا يحتوي على محتوى غير مناسب.</p>
-
-        <h2>🔄 مشاركة المعلومات</h2>
-        <p>بما أننا لا نجمع أي بيانات، فإننا لا نشارك أو نبيع أو ننقل أي معلومات شخصية لأطراف ثالثة.</p>
-
-        <h2>💾 تخزين البيانات</h2>
-        <p>جميع البيانات التي يحتاجها التطبيق للعمل (مثل الإعدادات والتفضيلات) يتم تخزينها محلياً على جهازك فقط ولا يتم إرسالها إلى خوادمنا.</p>
-
-        <h2>🔒 الأمان</h2>
-        <p>نحن ملتزمون بحماية أمان معلوماتك. بما أننا لا نجمع أي بيانات، فلا توجد مخاطر أمنية متعلقة بتسريب المعلومات الشخصية.</p>
-
-        <h2>📋 أذونات التطبيق</h2>
-        <p>تطبيقنا يطلب الحد الأدنى من الأذونات اللازمة للعمل فقط. أي أذونات مطلوبة ستكون واضحة وضرورية لوظائف التطبيق الأساسية.</p>
-
-        <h2>🔄 تحديثات السياسة</h2>
-        <p>قد نقوم بتحديث هذه السياسة من وقت لآخر. أي تغييرات ستكون واضحة ومعلنة في التطبيق. استمرارك في استخدام التطبيق يعني موافقتك على هذه التحديثات.</p>
-
-        <div class="contact-info">
-            <h3>📞 اتصل بنا</h3>
-            <p>إذا كان لديك أي أسئلة حول سياسة الخصوصية هذه، يرجى التواصل معنا:</p>
-            <p><strong>الهاتف:</strong> +966548293542</p>
-            <p><strong>البريد الإلكتروني:</strong> mohammed.mosa.eg@gmail.com</p>
-        </div>
-
-        <div class="date">
-            <p><strong>تاريخ آخر تحديث:</strong> أغسطس 2025</p>
-            <p>هذه السياسة سارية المفعول اعتباراً من تاريخ نشر التطبيق على متجر Google Play</p>
         </div>
     </div>
 
+
+    <!-- =================================================
+         ARABIC
+         ================================================= -->
+
+    <div id="arabicContent" class="language-content active">
+
+        <main class="page">
+
+            <header class="hero">
+
+                <div class="hero-index">01</div>
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        سياسة الاستخدام والخصوصية
+                    </div>
+
+                    <h1>
+                        سياسة<br>
+                        الخصوصية
+                    </h1>
+
+                    <p class="hero-description">
+                        نحن نقدر خصوصيتك ونلتزم بحمايتها.
+                        توضح هذه السياسة كيفية تعامل تطبيقنا
+                        مع المعلومات عند استخدامه.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <section class="summary">
+
+                <div class="summary-label">
+                    ملخص
+                </div>
+
+                <p class="summary-text">
+                    تطبيقنا لا يجمع أي بيانات شخصية، ولا يحتوي
+                    على إعلانات، ولا يشارك معلوماتك مع أي جهة
+                    خارجية. جميع البيانات الضرورية للتطبيق
+                    تبقى على جهازك.
+                </p>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">02</div>
+
+                <div class="section-content">
+
+                    <h2>جمع البيانات</h2>
+
+                    <p>
+                        تطبيقنا <strong>لا يجمع أي بيانات شخصية</strong>
+                        من المستخدمين. لا نطلب إنشاء حساب أو تسجيل
+                        الدخول، ولا نصل إلى المعلومات الشخصية الموجودة
+                        على جهازك.
+                    </p>
+
+                    <ul>
+                        <li>الاسم والبريد الإلكتروني ورقم الهاتف</li>
+                        <li>الموقع الجغرافي</li>
+                        <li>جهات الاتصال</li>
+                        <li>الصور أو الملفات المخزنة على الجهاز</li>
+                        <li>المعلومات الشخصية الخاصة بالجهاز</li>
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">03</div>
+
+                <div class="section-content">
+
+                    <h2>التحليلات والإحصائيات</h2>
+
+                    <p>
+                        لا نستخدم أدوات تحليل أو إحصائيات تجمع
+                        معلومات حول طريقة استخدامك للتطبيق.
+                        ما تقوم به داخل التطبيق يبقى على جهازك فقط.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">04</div>
+
+                <div class="section-content">
+
+                    <h2>الإعلانات</h2>
+
+                    <p>
+                        التطبيق خالٍ تماماً من الإعلانات.
+                        لن تشاهد إعلانات داخل التطبيق، ولا نشارك
+                        معلومات المستخدمين مع شركات الإعلان.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">05</div>
+
+                <div class="section-content">
+
+                    <h2>الأمان للأطفال</h2>
+
+                    <p>
+                        التطبيق مناسب لجميع الفئات العمرية،
+                        بما في ذلك الأطفال دون سن 13 عاماً،
+                        لأنه لا يجمع أي معلومات شخصية ولا يحتوي
+                        على محتوى غير مناسب.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">06</div>
+
+                <div class="section-content">
+
+                    <h2>مشاركة المعلومات</h2>
+
+                    <p>
+                        بما أننا لا نجمع بيانات شخصية، فإننا
+                        لا نبيع أو نشارك أو ننقل أي معلومات
+                        شخصية إلى أطراف ثالثة.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">07</div>
+
+                <div class="section-content">
+
+                    <h2>تخزين البيانات</h2>
+
+                    <p>
+                        جميع البيانات التي يحتاجها التطبيق للعمل،
+                        مثل الإعدادات والتفضيلات، يتم تخزينها
+                        محلياً على جهازك ولا يتم إرسالها إلى خوادمنا.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">08</div>
+
+                <div class="section-content">
+
+                    <h2>الأمان</h2>
+
+                    <p>
+                        نحن ملتزمون بحماية خصوصيتك.
+                        وبما أننا لا نجمع بيانات شخصية،
+                        فلا توجد لدينا قاعدة بيانات تحتوي
+                        على معلومات شخصية للمستخدمين.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">09</div>
+
+                <div class="section-content">
+
+                    <h2>أذونات التطبيق</h2>
+
+                    <p>
+                        يطلب التطبيق الحد الأدنى من الأذونات
+                        اللازمة لتشغيل وظائفه الأساسية.
+                        أي إذن مطلوب سيكون واضحاً ومرتبطاً
+                        مباشرة بوظيفة داخل التطبيق.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">10</div>
+
+                <div class="section-content">
+
+                    <h2>تحديثات السياسة</h2>
+
+                    <p>
+                        قد نقوم بتحديث سياسة الخصوصية من وقت لآخر.
+                        سيتم توضيح أي تغييرات مهمة ونشر النسخة
+                        المحدثة من هذه السياسة عند الحاجة.
+                    </p>
+
+                    <p>
+                        استمرارك في استخدام التطبيق بعد نشر
+                        التحديثات يعني موافقتك على السياسة المحدثة.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="contact">
+
+                <div class="contact-label">
+                    تواصل معنا
+                </div>
+
+                <div class="contact-content">
+
+                    <h2>هل لديك سؤال؟</h2>
+
+                    <p>
+                        إذا كان لديك أي استفسار حول سياسة الخصوصية،
+                        يمكنك التواصل معنا مباشرة.
+                    </p>
+
+                    <p>
+                        <strong>الهاتف:</strong>
+                        +966548293542
+                    </p>
+
+                    <p>
+                        <strong>البريد الإلكتروني:</strong>
+                        <a href="mailto:mohammed.mosa.eg@gmail.com">
+                            mohammed.mosa.eg@gmail.com
+                        </a>
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <footer>
+
+                <span>
+                    <strong>آخر تحديث:</strong>
+                    أغسطس 2025
+                </span>
+
+                <span>
+                    هذه السياسة سارية من تاريخ نشر التطبيق على Google Play
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- =================================================
+         ENGLISH
+         ================================================= -->
+
+    <div id="englishContent" class="language-content">
+
+        <main class="page">
+
+            <header class="hero">
+
+                <div class="hero-index">01</div>
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        PRIVACY & TERMS
+                    </div>
+
+                    <h1>
+                        Privacy<br>
+                        Policy
+                    </h1>
+
+                    <p class="hero-description">
+                        We value your privacy and are committed
+                        to protecting it. This policy explains
+                        how our application handles information
+                        when you use it.
+                    </p>
+
+                </div>
+
+            </header>
+
+
+            <section class="summary">
+
+                <div class="summary-label">
+                    SUMMARY
+                </div>
+
+                <p class="summary-text">
+                    Our application does not collect personal data,
+                    contains no advertisements, and does not share
+                    your information with third parties. All data
+                    required by the application remains on your device.
+                </p>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">02</div>
+
+                <div class="section-content">
+
+                    <h2>Data Collection</h2>
+
+                    <p>
+                        Our application <strong>does not collect
+                        personal information</strong> from users.
+                        We do not require account creation or login,
+                        and we do not access personal information
+                        stored on your device.
+                    </p>
+
+                    <ul>
+                        <li>Name, email address, or phone number</li>
+                        <li>Geographical location</li>
+                        <li>Contacts</li>
+                        <li>Photos or files stored on your device</li>
+                        <li>Personal device information</li>
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">03</div>
+
+                <div class="section-content">
+
+                    <h2>Analytics</h2>
+
+                    <p>
+                        We do not use analytics or tracking tools
+                        that collect information about how you use
+                        the application. Your activity remains
+                        on your device.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">04</div>
+
+                <div class="section-content">
+
+                    <h2>Advertising</h2>
+
+                    <p>
+                        The application is completely
+                        advertisement-free. You will not see
+                        advertisements within the application,
+                        and we do not share user information
+                        with advertising companies.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">05</div>
+
+                <div class="section-content">
+
+                    <h2>Children's Safety</h2>
+
+                    <p>
+                        The application is suitable for all age
+                        groups, including children under the age
+                        of 13, because we do not collect personal
+                        information and the application does not
+                        contain inappropriate content.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">06</div>
+
+                <div class="section-content">
+
+                    <h2>Information Sharing</h2>
+
+                    <p>
+                        Since we do not collect personal data,
+                        we do not sell, share, or transfer personal
+                        information to third parties.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">07</div>
+
+                <div class="section-content">
+
+                    <h2>Data Storage</h2>
+
+                    <p>
+                        All data required for the application to
+                        function, such as settings and preferences,
+                        is stored locally on your device and is not
+                        transmitted to our servers.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">08</div>
+
+                <div class="section-content">
+
+                    <h2>Security</h2>
+
+                    <p>
+                        We are committed to protecting your privacy.
+                        Since we do not collect personal information,
+                        we do not maintain a database containing
+                        users' personal information.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">09</div>
+
+                <div class="section-content">
+
+                    <h2>App Permissions</h2>
+
+                    <p>
+                        The application requests only the minimum
+                        permissions necessary for its core functions.
+                        Any required permission will be clearly
+                        explained and directly related to an
+                        application feature.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="section">
+
+                <div class="section-index">10</div>
+
+                <div class="section-content">
+
+                    <h2>Policy Updates</h2>
+
+                    <p>
+                        We may update this Privacy Policy from time
+                        to time. Any significant changes will be
+                        clearly communicated and the updated policy
+                        will be published when necessary.
+                    </p>
+
+                    <p>
+                        Your continued use of the application after
+                        changes are published constitutes acceptance
+                        of the updated policy.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="contact">
+
+                <div class="contact-label">
+                    CONTACT
+                </div>
+
+                <div class="contact-content">
+
+                    <h2>Have a question?</h2>
+
+                    <p>
+                        If you have any questions about this
+                        Privacy Policy, please contact us directly.
+                    </p>
+
+                    <p>
+                        <strong>Phone:</strong>
+                        +966548293542
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:mohammed.mosa.eg@gmail.com">
+                            mohammed.mosa.eg@gmail.com
+                        </a>
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <footer>
+
+                <span>
+                    <strong>Last updated:</strong>
+                    August 2025
+                </span>
+
+                <span>
+                    This policy is effective from the date
+                    the application was published on Google Play.
+                </span>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================================
+         LANGUAGE SCRIPT
+         ========================================= -->
+
     <script>
-        // إضافة تأثيرات بصرية بسيطة
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('h2');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.transform = 'translateX(0)';
-                        entry.target.style.opacity = '1';
-                    }
-                });
+
+        function setLanguage(language) {
+
+            const arabic = document.getElementById("arabicContent");
+            const english = document.getElementById("englishContent");
+
+            const arButton = document.getElementById("arButton");
+            const enButton = document.getElementById("enButton");
+
+            if (language === "en") {
+
+                document.documentElement.lang = "en";
+                document.documentElement.dir = "ltr";
+
+                arabic.classList.remove("active");
+                english.classList.add("active");
+
+                arButton.classList.remove("active");
+                enButton.classList.add("active");
+
+                document.title = "Privacy Policy";
+
+                localStorage.setItem("privacy-language", "en");
+
+            } else {
+
+                document.documentElement.lang = "ar";
+                document.documentElement.dir = "rtl";
+
+                english.classList.remove("active");
+                arabic.classList.add("active");
+
+                enButton.classList.remove("active");
+                arButton.classList.add("active");
+
+                document.title = "سياسة الخصوصية";
+
+                localStorage.setItem("privacy-language", "ar");
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
             });
-            
-            sections.forEach(section => {
-                section.style.transform = 'translateX(20px)';
-                section.style.opacity = '0.7';
-                section.style.transition = 'all 0.6s ease';
-                observer.observe(section);
-            });
+        }
+
+
+        /* Remember selected language */
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const savedLanguage =
+                localStorage.getItem("privacy-language");
+
+            if (savedLanguage === "en") {
+                setLanguage("en");
+            }
+
         });
+
     </script>
+
 </body>
 </html>
