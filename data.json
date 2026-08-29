@@ -1,0 +1,478 @@
+{
+  "ar": {
+    "meta": {
+      "title": "محمد موسى | مطور تطبيقات",
+      "logo": "م"
+    },
+    "nav": {
+      "home": "الرئيسية",
+      "education": "التعليم",
+      "experience": "الخبرات",
+      "knowledge": "المعرفة",
+      "certificates": "الشهادات",
+      "projects": "المشاريع",
+      "tools": "الأدوات",
+      "testimonials": "الآراء",
+      "testing": "الاختبار",
+      "contact": "تواصل"
+    },
+    "hero": {
+      "greeting": "مرحباً، أنا",
+      "name": "محمد موسى",
+      "title": "مطور تطبيقات",
+      "bio": "أبني تجارب رقمية استثنائية تجمع بين الأداء العالي والتصميم المتقن. أؤمن بأن التفاصيل الصغيرة تصنع الفارق الكبير.",
+      "phone": "+966 54 829 3542",
+      "email": "mohammed.mosa.eg@gmail.com",
+      "linkedin": "https://linkedin.com/in/mohammed-mosa-eg",
+      "github": "https://github.com/m4a28",
+      "whatsapp": "https://wa.me/message/MXV75QMVKRYZC1",
+      "photo": "images/home/mohammed_mosa.png",
+      "skills": ["Java", "Kotlin", "Jetpack Compose", "Dart", "Flutter", "Python", "UI/UX", "CI/CD", "Git", "GitHub", "Linux"],
+      "identities": [
+        { "icon": "mdi:code-braces", "label": "مطور تطبيقات" },
+        { "icon": "mdi:palette-outline", "label": "مصمم واجهات" },
+        { "icon": "mdi:cellphone", "label": "مطور فلاتر" }
+      ],
+      "cvBtn": "تحميل السيرة الذاتية",
+      "cvLink": "images/education/Mohammed's Resume.pdf",
+      "worksBtn": "استعراض أعمالي"
+    },
+    "education": {
+      "title": "التعليم الأكاديمي",
+      "subtitle": "المسيرة التعليمية والشهادات الجامعية",
+      "items": [
+        {
+          "degree": "بكالوريوس علوم وتربية",
+          "university": "جامعة الزقازيق",
+          "year": "2018 - 2022",
+          "gpa": "معدل 4.5 / 5.0",
+          "description": "تخصص علوم وتربية."
+        }
+      ]
+    },
+    "experience": {
+      "title": "الخبرات العملية",
+      "subtitle": "المسار المهني والمشاريع التي عملت عليها",
+      "items": [
+        {
+          "role": "مطور تطبيقات Flutter",
+          "company": "عمل حر",
+          "year": "2022 — الآن",
+          "description": "تطوير تطبيقات جوال لعملاء مختلفين باستخدام Flutter و Dart. تصميم واجهات مستخدم وتوصيلها بقواعد بيانات محلية وسحابية. بناء تطبيقات كاملة من الصفر حتى النشر على المتاجر.",
+          "tags": ["Flutter", "Dart", "Firebase", "SQLite"]
+        },
+        {
+          "role": "مطور تطبيقات Android",
+          "company": "مشاريع شخصية",
+          "year": "2020 — 2022",
+          "description": "بناء تطبيقات Android أصلية باستخدام Java و Kotlin مع تطبيق مبادئ هندسة البرمجيات ونمط MVVM. تطوير تطبيق الصحيحين الذي يخدم آلاف المستخدمين.",
+          "tags": ["Java", "Kotlin", "XML", "SQLite"]
+        },
+        {
+          "role": "مطور أدوات ومستقل",
+          "company": "مشاريع مفتوحة المصدر",
+          "year": "2021 — الآن",
+          "description": "تصميم وتطوير 6 أدوات مجانية يستخدمها أكثر من 7,500 مستخدم. أدوات لتحويل الأرقام واستخراج الألوان وصناعة الكروت والتعامل مع التعبيرات النمطية.",
+          "tags": ["Python", "JavaScript", "HTML/CSS", "Open Source"]
+        }
+      ]
+    },
+    "knowledge": {
+      "title": "المعلومات والمعرفة",
+      "subtitle": "ما أتقنه وما أستطيع تقديمه في مشاريعك",
+      "categories": [
+        {
+          "icon": "mdi:cellphone",
+          "name": "تطوير تطبيقات الجوال",
+          "items": ["Flutter", "Dart", "Java", "Kotlin", "أداء عالي", "تجربة مستخدم سلسة"]
+        },
+        {
+          "icon": "mdi:database-outline",
+          "name": "تطوير قواعد البيانات",
+          "items": ["Firebase", "SQLite", "MySQL", "PostgreSQL", "MongoDB"]
+        },
+        {
+          "icon": "mdi:palette-outline",
+          "name": "التصميم",
+          "items": ["Figma", "مبادئ UI/UX", "تصميم متجاوب", "أنظمة التصميم"]
+        },
+        {
+          "icon": "mdi:cloud-outline",
+          "name": "البنية التحتية",
+          "items": ["Docker", "CI/CD", "Git / GitHub", "Linux"]
+        },
+        {
+          "icon": "mdi:chart-line",
+          "name": "مهارات إضافية",
+          "items": [ "إدارة المشاريع", "العمل الجماعي", "حل المشكلات"]
+        }
+      ]
+    },
+    "certificates": {
+      "title": "الشهادات والدورات",
+      "subtitle": "شهادات مهنية ودورات تدريبية معتمدة",
+      "items": [
+        { "name": "Java for Mobile App Development", "org": "ITI Institute", "date": "2022", "icon": "mdi:language-java" },
+        { "name": "Learn Java by Building 17 Projects", "org": "Udemy", "date": "2022", "icon": "mdi:language-java" },
+        { "name": "Linux Essentials certificate", "org": "Udemy", "date": "2020", "icon": "mdi:linux" },
+        { "name": "Android Developer Pathway certificate", "org": "ITI Institute", "date": "2023", "icon": "mdi:android" },
+        { "name": "The Complete Flutter Development Guide", "org": "Udemy", "date": "2023", "icon": "mdi:flutter-dashboard" },
+        { "name": "Database Design and Management", "org": "Udemy", "date": "2024", "icon": "mdi:database" }
+      ]
+    },
+    "projects": {
+      "title": "المشاريع",
+      "subtitle": "نماذج من أعمالي التي أنجزتها",
+      "items": [
+        {
+          "title": "Qr Lens | ماسح الباركود",
+          "description": "تطبيق ماسح الباركود و انشاء الباركود و مشاركتها و تخزينها.",
+          "image": "https://raw.githubusercontent.com/M4A28/qr_lens/refs/heads/main/assets/icon/icon.png",
+          "tags": ["Flutter", "Dart", "Sqlite"],
+          "link": "https://github.com/M4A28/qr_lens/releases/tag/v1.0.1",
+          "github": "https://github.com/M4A28/qr_lens"
+        },
+        {
+          "title": "تطبيق إدارة المحلات",
+          "description": "تطبيق ذكي لإدارة المحلات و العملاء و المبيعات و المشتريات و المخزون و التقارير و التحليلات المتقدمة.",
+          "image": "https://github.com/M4A28/Towmmen/raw/master/app/screen/Screenshot_20240929_164224_com.mohmmed.mosa.eg.towmmen.jpg",
+          "tags": ["Kotlin", "Jetpack Compose", "Sqlite"],
+          "link": "https://github.com/M4A28/Towmmen/releases",
+          "github": "https://github.com/M4A28/Towmmen"
+        },
+        {
+          "title": "مستخرج الالوان من الصور",
+          "description": "تطبيق لاستخراج الالوان من الصور و مشاركتها و تخزينها.",
+          "image": "https://github.com/M4A28/Color_Extractor/raw/main/output/3.jpg_color_palette.png",
+          "tags": ["Python", "scikit-learn", "pillow", "matplotlib"],
+          "link": "https://github.com/M4A28/Color_Extractor",
+          "github": "https://github.com/M4A28/Color_Extractor"
+        },
+        {
+          "title": "الصحيحين | صحيح البخاري و مسلم",
+          "description": "تطبيق لعرض صحيح البخاري و مسلم و عرض الاحديث الصحيحة و مشاركتها.",
+          "image": "https://github.com/M4A28/Sahihain/raw/master/app/sampledata/Screenshot_20221104_131647.png",
+          "tags": ["Java", "XML", "Sqlite"],
+          "link": "https://github.com/M4A28/Sahihain/tree/master/app/release",
+          "github": "https://github.com/M4A28/Sahihain"
+        },
+        {
+          "title": "صانع الشهادات",
+          "description": "تطبيق ذكي لصناعة الشهادات و مشاركتها.",
+          "image": "https://github.com/M4A28/Certificate_Maker/raw/main/Resulting_Image/examble3%40examble.com.png",
+          "tags": ["Python", "pillow", "CSV"],
+          "link": "https://github.com/M4A28/Certificate_Maker",
+          "github": "https://github.com/M4A28/Certificate_Maker"
+        }
+      ]
+    },
+    "tools": {
+      "title": "الأدوات البرمجية",
+      "subtitle": "أدوات قمت بتطويرها ومتاحة للجميع مجاناً",
+      "items": [
+        { "name": "محول الارقام", "desc": "أداة لتحويل الارقام الى كلمات عربية", "icon": "mdi:numeric", "link": "tools/numbers.html", "users": "1.3K" },
+        { "name": "مستخرج الالوان", "desc": "أداة لاستخراج الالوان من الصور", "icon": "mdi:palette-outline", "link": "tools/color_extractor.html", "users": "900" },
+        { "name": "المعايد", "desc": "أداة لصناعة كروت المعايدة", "icon": "mdi:card-outline", "link": "tools/HAPPY_EAID/index.html", "users": "3.2K" },
+        { "name": "مستخرج الروابط", "desc": "أداة لاستخراج الروابط من المواقع", "icon": "mdi:link-variant", "link": "tools/link_extractor.html", "users": "1.6K" },
+        { "name": "منشئ التعبيرات النمطية", "desc": "أداة لبناء التعبيرات النمطية بشكل تفاعلي", "icon": "mdi:regex", "link": "tools/regex-builder.html", "users": "620" },
+        { "name": "دليل دوال إكسل الذكي", "desc": "أداة للبحث عن دوال إكسل ومعرفة وظيفتها", "icon": "mdi:table-large", "link": "tools/excel_function.html", "users": "520" }
+      ]
+    },
+    "testimonials": {
+      "title": "آراء المستخدمين",
+      "subtitle": "ماذا يقول من استخدم أدواتي وتطبيقاتي",
+      "items": [
+        {
+          "name": "أحمد محمد",
+          "role": "مطور ويب",
+          "text": "أداة محول الأرقام وفرت علي ساعات من العمل في مشروعي. بسيطة وسريعة وما تحتاج تعقيد.",
+          "rating": 5
+        },
+        {
+          "name": "سارة علي",
+          "role": "مصممة جرافيك",
+          "text": "مستخرج الألوان من أفضل الأدوات اللي استخدمتها. دقيقة وسريعة ونتائجها ممتازة.",
+          "rating": 5
+        },
+        {
+          "name": "خالد إبراهيم",
+          "role": "طالب جامعي",
+          "text": "تطبيق الصحيحين ساعدني كثير في المراجعة والبحث عن الأحاديث. واجهته سلسة والتنقل سهل.",
+          "rating": 5
+        },
+        {
+          "name": "نورا حسن",
+          "role": "مديرة مدرسة",
+          "text": "أداة صانع الشهادات وفّرت علي وقت كبير في نهاية كل فصل. سهلة الاستخدام والنتيجة احترافية.",
+          "rating": 4
+        }
+      ]
+    },
+    "testing": {
+      "title": "انضم لفريق الاختبار",
+      "subtitle": "ساعدني في تحسين أدواتي ومشاريعي",
+      "description": "أبحث عن أشخاص شغوفين بالتقنية لاختبار أدواتي الجديدة قبل إطلاقها رسمياً. ستكون لك الأولوية في استخدام الميزات الجديدة ومساعدتي في اكتشاف المشاكل وتحسين تجربة المستخدم.",
+      "benefits": [
+        "استخدام مبكر للأدوات والميزات الجديدة",
+        "التأثير المباشر على التطوير",
+        "ذكر اسمك في قائمة المساهمين",
+        "وصول مجاني للميزات المميزة"
+      ],
+      "btn": "انضم الآن لقائمة المختبرين",
+      "btnLink": "https://forms.gle/AmRmpgf5rg1Ki9qq7"
+    },
+    "contact": {
+      "title": "تواصل معي",
+      "subtitle": "هل لديك مشروع أو فكرة؟ دعنا نتحدث",
+      "namePh": "الاسم الكامل",
+      "emailPh": "البريد الإلكتروني",
+      "subjectPh": "الموضوع",
+      "messagePh": "رسالتك...",
+      "sendBtn": "إرسال الرسالة",
+      "successMsg": "تم إرسال رسالتك بنجاح!",
+      "errorMsg": "يرجى ملء جميع الحقول بشكل صحيح."
+    },
+    "footer": {
+      "text": "صُمّم وطُوّر بكل شغف",
+      "madeWith": "صُنع بـ"
+    }
+  },
+  "en": {
+    "meta": {
+      "title": "Mohammed Mosa | Mobile App Developer",
+      "logo": "MM"
+    },
+    "nav": {
+      "home": "Home",
+      "education": "Education",
+      "experience": "Experience",
+      "knowledge": "Knowledge",
+      "certificates": "Certificates",
+      "projects": "Projects",
+      "tools": "Tools",
+      "testimonials": "Testimonials",
+      "testing": "Testing",
+      "contact": "Contact"
+    },
+    "hero": {
+      "greeting": "Hello, I'm",
+      "name": "Mohammed Mosa",
+      "title": "Mobile App Developer",
+      "bio": "I build exceptional digital experiences that combine high performance with refined design. I believe small details make the big difference.",
+      "phone": "+966 54 829 3542",
+      "email": "mohammed.mosa.eg@gmail.com",
+      "linkedin": "https://linkedin.com/in/mohammed-mosa-eg",
+      "github": "https://github.com/m4a28",
+      "whatsapp": "https://wa.me/message/MXV75QMVKRYZC1",
+      "photo": "images/home/mohammed_mosa.png",
+      "skills": ["Java", "Kotlin", "Jetpack Compose", "Dart", "Flutter", "Python", "UI/UX", "CI/CD", "Git", "GitHub", "Linux"],
+      "identities": [
+        { "icon": "mdi:code-braces", "label": "App Developer" },
+        { "icon": "mdi:palette-outline", "label": "UI Designer" },
+        { "icon": "mdi:cellphone", "label": "Flutter Developer" }
+      ],
+      "cvBtn": "Download CV",
+      "cvLink": "#",
+      "worksBtn": "View My Work"
+    },
+    "education": {
+      "title": "Academic Education",
+      "subtitle": "Educational Journey and University Degrees",
+      "items": [
+        {
+          "degree": "Bachelor of Science and Education",
+          "university": "Zagazig University",
+          "year": "2018 - 2022",
+          "gpa": "GPA 4.5 / 5.0",
+          "description": "Specialization in Science and Education."
+        }
+      ]
+    },
+    "experience": {
+      "title": "Work Experience",
+      "subtitle": "Professional path and projects I've worked on",
+      "items": [
+        {
+          "role": "Flutter App Developer",
+          "company": "Freelance",
+          "year": "2022 — Present",
+          "description": "Developing mobile apps for various clients using Flutter and Dart. Designing user interfaces and connecting them to local and cloud databases. Building complete apps from scratch to store publishing.",
+          "tags": ["Flutter", "Dart", "Firebase", "SQLite"]
+        },
+        {
+          "role": "Android App Developer",
+          "company": "Personal Projects",
+          "year": "2020 — 2022",
+          "description": "Building native Android apps using Java and Kotlin with clean architecture principles and MVVM pattern. Developing Sahihain app which serves thousands of users.",
+          "tags": ["Java", "Kotlin", "XML", "SQLite"]
+        },
+        {
+          "role": "Tool Developer & Indie Maker",
+          "company": "Open Source Projects",
+          "year": "2021 — Present",
+          "description": "Designing and developing 6 free tools used by over 7,500 users. Tools for number conversion, color extraction, card creation, and regex building.",
+          "tags": ["Python", "JavaScript", "HTML/CSS", "Open Source"]
+        }
+      ]
+    },
+    "knowledge": {
+      "title": "Knowledge & Expertise",
+      "subtitle": "What I master and can deliver in your projects",
+      "categories": [
+        {
+          "icon": "mdi:cellphone",
+          "name": "Mobile App Development",
+          "items": ["Flutter", "Dart", "Java", "Kotlin", "High Performance", "Seamless UX"]
+        },
+        {
+          "icon": "mdi:database-outline",
+          "name": "Database Development",
+          "items": ["Firebase", "SQLite", "MySQL", "PostgreSQL", "MongoDB"]
+        },
+        {
+          "icon": "mdi:palette-outline",
+          "name": "Design",
+          "items": ["Figma", "UI/UX Principles", "Responsive Design", "Design Systems"]
+        },
+        {
+          "icon": "mdi:cloud-outline",
+          "name": "Infrastructure",
+          "items": ["Docker", "CI/CD", "Git / GitHub", "Linux"]
+        },
+        {
+          "icon": "mdi:chart-line",
+          "name": "Additional Skills",
+          "items": ["Performance & Optimization", "Project Management", "Teamwork", "Problem Solving"]
+        }
+      ]
+    },
+    "certificates": {
+      "title": "Certificates & Courses",
+      "subtitle": "Professional certifications and accredited training courses",
+      "items": [
+        { "name": "Java for Mobile App Development", "org": "ITI Institute", "date": "2022", "icon": "mdi:language-java" },
+        { "name": "Learn Java by Building 17 Projects", "org": "Udemy", "date": "2022", "icon": "mdi:language-java" },
+        { "name": "Linux Essentials certificate", "org": "Udemy", "date": "2020", "icon": "mdi:linux" },
+        { "name": "Android Developer Pathway certificate", "org": "ITI Institute", "date": "2023", "icon": "mdi:android" },
+        { "name": "The Complete Flutter Development Guide", "org": "Udemy", "date": "2023", "icon": "mdi:flutter-dashboard" },
+        { "name": "Database Design and Management", "org": "Udemy", "date": "2024", "icon": "mdi:database" }
+      ]
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "Selected samples of my completed work",
+      "items": [
+        {
+          "title": "Qr Lens | Barcode Scanner",
+          "description": "A barcode scanner app to create, share, and store QR codes and barcodes.",
+          "image": "https://raw.githubusercontent.com/M4A28/qr_lens/refs/heads/main/assets/icon/icon.png",
+          "tags": ["Flutter", "Dart", "Sqlite"],
+          "link": "https://github.com/M4A28/qr_lens/releases/tag/v1.0.1",
+          "github": "https://github.com/M4A28/qr_lens"
+        },
+        {
+          "title": "Shop Management App",
+          "description": "A smart app for managing shops, customers, sales, purchases, inventory, reports, and advanced analytics.",
+          "image": "https://github.com/M4A28/Towmmen/raw/master/app/screen/Screenshot_20240929_164224_com.mohmmed.mosa.eg.towmmen.jpg",
+          "tags": ["Kotlin", "Jetpack Compose", "Sqlite"],
+          "link": "https://github.com/M4A28/Towmmen/releases",
+          "github": "https://github.com/M4A28/Towmmen"
+        },
+        {
+          "title": "Image Color Extractor",
+          "description": "An app to extract color palettes from images, share, and store them.",
+          "image": "https://github.com/M4A28/Color_Extractor/raw/main/output/3.jpg_color_palette.png",
+          "tags": ["Python", "scikit-learn", "pillow", "matplotlib"],
+          "link": "https://github.com/M4A28/Color_Extractor",
+          "github": "https://github.com/M4A28/Color_Extractor"
+        },
+        {
+          "title": "Sahihain | Sahih Al-Bukhari & Muslim",
+          "description": "An app to display Sahih Al-Bukhari and Muslim, browse authentic Hadiths, and share them.",
+          "image": "https://github.com/M4A28/Sahihain/raw/master/app/sampledata/Screenshot_20221104_131647.png",
+          "tags": ["Java", "XML", "Sqlite"],
+          "link": "https://github.com/M4A28/Sahihain/tree/master/app/release",
+          "github": "https://github.com/M4A28/Sahihain"
+        },
+        {
+          "title": "Certificate Maker",
+          "description": "A smart app for generating and sharing professional certificates.",
+          "image": "https://github.com/M4A28/Certificate_Maker/raw/main/Resulting_Image/examble3%40examble.com.png",
+          "tags": ["Python", "pillow", "CSV"],
+          "link": "https://github.com/M4A28/Certificate_Maker",
+          "github": "https://github.com/M4A28/Certificate_Maker"
+        }
+      ]
+    },
+    "tools": {
+      "title": "Developer Tools",
+      "subtitle": "Tools I built and made available for everyone for free",
+      "items": [
+        { "name": "Number Converter", "desc": "Convert numbers into Arabic words", "icon": "mdi:numeric", "link": "tools/numbers.html", "users": "1.3K" },
+        { "name": "Color Extractor", "desc": "Extract color palettes from images", "icon": "mdi:palette-outline", "link": "tools/color_extractor.html", "users": "900" },
+        { "name": "Greeting Card Maker", "desc": "Create custom greeting cards", "icon": "mdi:card-outline", "link": "tools/HAPPY_EAID/index.html", "users": "3.2K" },
+        { "name": "Link Extractor", "desc": "Extract URLs from websites", "icon": "mdi:link-variant", "link": "tools/link_extractor.html", "users": "1.6K" },
+        { "name": "Regex Builder", "desc": "Build regular expressions interactively", "icon": "mdi:regex", "link": "tools/regex-builder.html", "users": "620" },
+        { "name": "Excel Function Guide", "desc": "Find the right Excel function", "icon": "mdi:table-large", "link": "tools/excel_function.html", "users": "520" }
+      ]
+    },
+    "testimonials": {
+      "title": "User Testimonials",
+      "subtitle": "What people say about my tools and apps",
+      "items": [
+        {
+          "name": "Ahmed Mohamed",
+          "role": "Web Developer",
+          "text": "The number converter tool saved me hours of work on my project. Simple, fast, and no complexity needed.",
+          "rating": 5
+        },
+        {
+          "name": "Sara Ali",
+          "role": "Graphic Designer",
+          "text": "The color extractor is one of the best tools I've used. Accurate, fast, and the results are excellent.",
+          "rating": 5
+        },
+        {
+          "name": "Khaled Ibrahim",
+          "role": "University Student",
+          "text": "The Sahihain app helped me a lot in reviewing and searching for Hadiths. Smooth interface and easy navigation.",
+          "rating": 5
+        },
+        {
+          "name": "Noura Hassan",
+          "role": "School Principal",
+          "text": "The certificate maker tool saved me so much time at the end of each semester. Easy to use and professional results.",
+          "rating": 4
+        }
+      ]
+    },
+    "testing": {
+      "title": "Join the Testing Team",
+      "subtitle": "Help me improve my tools and projects",
+      "description": "I'm looking for tech enthusiasts to test my new tools before official launch. You'll get early access to new features and help me discover issues and improve user experience.",
+      "benefits": [
+        "Early access to tools and new features",
+        "Direct influence on development",
+        "Your name in the contributors list",
+        "Free access to premium features"
+      ],
+      "btn": "Join the Testing List Now",
+      "btnLink": "https://forms.gle/AmRmpgf5rg1Ki9qq7"
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "subtitle": "Have a project or idea? Let's talk",
+      "namePh": "Full Name",
+      "emailPh": "Email Address",
+      "subjectPh": "Subject",
+      "messagePh": "Your message...",
+      "sendBtn": "Send Message",
+      "successMsg": "Your message was sent successfully!",
+      "errorMsg": "Please fill in all fields correctly."
+    },
+    "footer": {
+      "text": "Designed and developed with passion",
+      "madeWith": "Made with"
+    }
+  }
+}
